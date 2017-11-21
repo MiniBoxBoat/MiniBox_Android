@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">迷你箱</string>
+    <string name="splash_introduce">拥有米箱，陪她共走远方\n锁住烦恼，和我嬉戏打闹</string>
+    <string name="main_scan">扫一扫</string>
+    <string name="main_my_box">我的箱子</string>
+    <string name="main_user_detail">个人资料</string>
+    <string name="main_discount">优惠卷</string>
+    <string name="main_call_service">客服</string>
+    <string name="main_settings">设置</string>
+    <string name="main_hint_unlogin">点击登陆</string>
 </resources>

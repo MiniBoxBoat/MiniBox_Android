@@ -5,3 +5,5 @@ package com.jay86.minibox.bean
  */
 
 data class ApiWrapper<out T>(val status: String, val message: String, val data: T)
+
+data class User(val id: String, var nickname: String, var avatar: String)

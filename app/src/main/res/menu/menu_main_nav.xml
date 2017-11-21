@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/my_box"
+        android:title="@string/main_my_box" />
+
+    <item
+        android:id="@+id/user_detail"
+        android:title="@string/main_user_detail" />
+
+    <item
+        android:id="@+id/discount"
+        android:title="@string/main_discount" />
+
+    <item
+        android:id="@+id/call_service"
+        android:title="@string/main_call_service" />
+
+    <item
+        android:id="@+id/settings"
+        android:title="@string/main_settings" />
+</menu>

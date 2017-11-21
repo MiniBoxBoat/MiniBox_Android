@@ -5,8 +5,10 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.view.View
 import android.view.WindowManager
+import com.jay86.minibox.R
 import com.jay86.minibox.utils.LogUtils
 
 /**
@@ -15,6 +17,9 @@ import com.jay86.minibox.utils.LogUtils
 
 @SuppressLint("Registered")
 open class BaseActivity : AppCompatActivity() {
+    open protected val title: String
+        get() = resources.getString(R.string.app_name)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -22,13 +27,19 @@ open class BaseActivity : AppCompatActivity() {
             val decorView = window.decorView
             val option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
             decorView.systemUiVisibility = option
-            window.navigationBarColor = Color.TRANSPARENT
+            //window.navigationBarColor = Color.TRANSPARENT
             window.statusBarColor = Color.TRANSPARENT
         } else {
             window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
                     WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         }
         LogUtils.v("activity_name", javaClass.name)
+    }
+
+    fun Toolbar.init(onclick: (() -> Unit)? = null) {
+        setSupportActionBar(this)
+        this@BaseActivity.setTitle(title)
+        setNavigationOnClickListener { onclick?.invoke() }
     }
 
     fun setFullScreen() {

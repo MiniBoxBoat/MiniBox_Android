@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#4481EB</color>
-    <color name="colorPrimaryDark">#04BEFE</color>
+    <color name="colorPrimary">#04BEFE</color>
+    <color name="colorPrimaryDark">#4481EB</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorSplashAppName">#505050</color>
+    <color name="colorSplashIntroduce">#1e1e1e</color>
+    <color name="colorNavHeaderNickname">#FFFFFF</color>
 </resources>
