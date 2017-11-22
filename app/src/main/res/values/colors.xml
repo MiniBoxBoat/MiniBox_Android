@@ -4,7 +4,5 @@
     <color name="colorPrimaryDark">#4481EB</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorSplashAppName">#505050</color>
-    <color name="colorSplashIntroduce">#1e1e1e</color>
-    <color name="colorNavHeaderNickname">#FFFFFF</color>
+    <color name="colorWhite">#FFFFFF</color>
 </resources>

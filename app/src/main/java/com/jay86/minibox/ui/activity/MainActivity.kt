@@ -1,33 +1,26 @@
 package com.jay86.minibox.ui.activity
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.jay86.minibox.App
 import com.jay86.minibox.R
+import com.jay86.minibox.ui.activity.user.LoginActivity
 import com.jay86.minibox.utils.setImageUrl
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.find
-import org.jetbrains.anko.startActivity
 
 class MainActivity : BaseActivity() {
-    companion object {
-        fun activityStart(context: Context, finishBefore: Boolean = true) {
-            context.startActivity<MainActivity>()
-            if (finishBefore && context is Activity) context.finish()
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        toolbar.init { drawerLayout.openDrawer(Gravity.START) }
+        toolbar.init(View.OnClickListener { drawerLayout.openDrawer(Gravity.START) })
         mapView.onCreate(savedInstanceState)
         initNavigationView()
     }
@@ -44,7 +37,7 @@ class MainActivity : BaseActivity() {
             if (App.isLogin) {
                 actionIfLogin!!.invoke()
             } else {
-                LoginActivity.activityStart(this, false)
+                activityStart<LoginActivity>(false)
             }
         }
 
@@ -85,7 +78,7 @@ class MainActivity : BaseActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?) = when (item!!.itemId) {
         R.id.qr_scan -> {
-            QRScanActivity.activityStart(this, false)
+            activityStart<QRScanActivity>(false)
             true
         }
         else -> false

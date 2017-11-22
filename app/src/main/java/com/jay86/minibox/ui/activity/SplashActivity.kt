@@ -13,6 +13,6 @@ class SplashActivity : BaseActivity() {
         setContentView(R.layout.activity_splash)
 
         setFullScreen()
-        Handler().postDelayed({ MainActivity.activityStart(this) }, millisToFinish)
+        Handler().postDelayed({ activityStart<MainActivity>() }, millisToFinish)
     }
 }
