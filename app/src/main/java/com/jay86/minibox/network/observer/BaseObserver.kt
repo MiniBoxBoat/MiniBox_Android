@@ -8,10 +8,10 @@ import io.reactivex.disposables.Disposable
  * Created by Jay on 2017/10/10.
  */
 
-abstract class BaseObserver<T> : Observer<T> {
+open class BaseObserver<T> : Observer<T> {
     override fun onSubscribe(d: Disposable) = Unit
 
-    override fun onNext(t: T) = Unit
+    override fun onNext(_object: T) = Unit
 
     override fun onComplete() = Unit
 

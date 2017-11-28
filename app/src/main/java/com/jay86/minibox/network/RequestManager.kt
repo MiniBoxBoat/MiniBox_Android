@@ -1,7 +1,10 @@
 package com.jay86.minibox.network
 
 import com.jay86.minibox.BuildConfig
+import com.jay86.minibox.bean.ApiWrapper
+import com.jay86.minibox.bean.User
 import com.jay86.minibox.config.BASE_URL
+import com.jay86.minibox.network.observer.BaseObserver
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,6 +21,7 @@ import java.util.concurrent.TimeUnit
  * Created by Jay on 2017/10/10.
  */
 object RequestManager {
+    const val REQUEST_SUCCESSFUL = "1"
     private const val DEFAULT_TIME_OUT = 30
 
     private val apiService: ApiService
@@ -44,10 +48,18 @@ object RequestManager {
         return builder.build()
     }
 
-    private fun <T> Observer<T>.subscriber(observable: Observable<T>) {
-        observable.subscribeOn(Schedulers.io())
+    fun login(phone: String, password: String, observer: BaseObserver<User>) {
+        apiService.login(phone, password)
+                .map { it.nextOrError() }
+                .subscriber(observer)
+    }
+
+    private fun <T> ApiWrapper<T>.nextOrError() = if (status != REQUEST_SUCCESSFUL) throw ApiException() else data
+
+    private fun <T> Observable<T>.subscriber(observer: Observer<T>) {
+        subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this)
+                .subscribe(observer)
     }
 }

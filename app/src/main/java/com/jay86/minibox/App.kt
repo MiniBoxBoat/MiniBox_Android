@@ -5,6 +5,10 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import com.jay86.minibox.bean.User
+import com.jay86.minibox.config.SP_USER_KEY
+import com.jay86.minibox.network.RequestManager
+import com.jay86.minibox.network.observer.BaseObserver
+import com.jay86.minibox.utils.extension.getPreference
 
 /**
  * Created by Jay68 on 2017/11/20.
@@ -31,5 +35,24 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         context = applicationContext
+        login()
+    }
+
+    private fun login() {
+        val user = User.fromJson(context.getPreference(SP_USER_KEY, "")!!)
+        if (user != null) {
+            App.user = user
+            RequestManager.login(user.phoneNumber, user.password, object : BaseObserver<User>() {
+                override fun onNext(_object: User) {
+                    super.onNext(_object)
+                    App.user = user
+                }
+
+                override fun onError(e: Throwable) {
+                    super.onError(e)
+                    //todo 错误处理：密码错误、网络问题
+                }
+            })
+        }
     }
 }

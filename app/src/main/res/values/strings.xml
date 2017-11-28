@@ -15,4 +15,7 @@
     <string name="login_hint_phone">手机号</string>
     <string name="login_hint_error_password">手机号或密码错误</string>
     <string name="login_hint_error_account">此用户不存在</string>
+    <string name="login_register_hint">还没有账户?</string>
+    <string name="login_register_hint2">注册</string>
+    <string name="hint_network_error">网络错误</string>
 </resources>

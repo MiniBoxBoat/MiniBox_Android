@@ -41,18 +41,30 @@
         app:layout_constraintVertical_bias="0.243"
         app:srcCompat="@drawable/login_logo" />
 
-    <TextView
+    <LinearLayout
         android:id="@+id/toRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:textColor="@color/ColorLoginRegisterHint"
-        android:textSize="15sp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="还没有账户?注册" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_register_hint"
+            android:textColor="@color/ColorLoginRegisterHint"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_register_hint2"
+            android:textColor="@color/colorLoginRegisterHint2"
+            android:textSize="15sp" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/login"
@@ -80,6 +92,7 @@
         android:drawablePadding="19dp"
         android:drawableStart="@drawable/ic_login_pwd"
         android:hint="@string/login_hint_password"
+        android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:maxLength="20"
         android:textSize="15sp"

@@ -1,4 +1,4 @@
-package com.jay86.minibox.utils
+package com.jay86.minibox.utils.extension
 
 import android.graphics.drawable.Drawable
 import android.widget.ImageView

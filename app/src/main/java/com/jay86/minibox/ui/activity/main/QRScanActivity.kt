@@ -1,4 +1,4 @@
-package com.jay86.minibox.ui.activity
+package com.jay86.minibox.ui.activity.main
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

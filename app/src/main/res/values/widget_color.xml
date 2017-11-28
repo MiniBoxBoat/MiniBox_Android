@@ -4,6 +4,7 @@
     <color name="colorSplashIntroduce">#1e1e1e</color>
     <color name="colorNavHeaderNickname">@color/colorWhite</color>
     <color name="ColorLoginRegisterHint">#546E7A</color>
+    <color name="colorLoginRegisterHint2">#263238</color>
     <color name="colorLoginButton">#4C93FF</color>
     <color name="colorLoginButtonText">@color/colorWhite</color>
     <color name="colorLoginForgetPassword">#A1A2A2</color>

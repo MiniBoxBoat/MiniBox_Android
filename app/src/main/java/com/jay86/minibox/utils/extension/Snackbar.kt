@@ -1,4 +1,4 @@
-package com.jay86.minibox.utils
+package com.jay86.minibox.utils.extension
 
 import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar

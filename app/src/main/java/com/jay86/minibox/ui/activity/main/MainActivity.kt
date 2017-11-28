@@ -1,4 +1,4 @@
-package com.jay86.minibox.ui.activity
+package com.jay86.minibox.ui.activity.main
 
 import android.os.Bundle
 import android.view.Gravity
@@ -9,8 +9,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.jay86.minibox.App
 import com.jay86.minibox.R
+import com.jay86.minibox.ui.activity.BaseActivity
 import com.jay86.minibox.ui.activity.user.LoginActivity
-import com.jay86.minibox.utils.setImageUrl
+import com.jay86.minibox.utils.extension.setImageUrl
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.find
 
@@ -97,6 +98,10 @@ class MainActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         mapView.onResume()
+
+        if (App.isLogin) {
+
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {

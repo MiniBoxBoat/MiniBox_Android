@@ -3,6 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jay86.minibox.ui.activity.main.QRScanActivity">
+    tools:context="com.jay86.minibox.ui.activity.user.UserDetailActivity">
 
 </android.support.constraint.ConstraintLayout>

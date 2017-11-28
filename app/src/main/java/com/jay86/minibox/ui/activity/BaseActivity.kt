@@ -2,18 +2,18 @@ package com.jay86.minibox.ui.activity
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import com.jay86.minibox.App
 import com.jay86.minibox.R
-import com.jay86.minibox.ui.activity.user.LoginActivity
 import com.jay86.minibox.utils.LogUtils
+import com.jay86.minibox.utils.extension.autoHideKeyBoard
 import org.jetbrains.anko.startActivity
 
 /**
@@ -22,13 +22,6 @@ import org.jetbrains.anko.startActivity
 
 @SuppressLint("Registered")
 open class BaseActivity : AppCompatActivity() {
-    companion object {
-        fun activityStart(context: Context, finishBefore: Boolean = true) {
-            context.startActivity<LoginActivity>()
-            if (finishBefore && context is Activity) context.finish()
-        }
-    }
-
     open protected val title: String
         get() = resources.getString(R.string.app_name)
 
@@ -69,5 +62,13 @@ open class BaseActivity : AppCompatActivity() {
     inline fun <reified T : Activity> Activity.activityStart(finishBefore: Boolean = true) {
         startActivity<T>()
         if (finishBefore) finish()
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        if (ev?.action == MotionEvent.ACTION_DOWN) {
+            currentFocus.autoHideKeyBoard(ev)
+            return super.dispatchTouchEvent(ev)
+        }
+        return window.superDispatchTouchEvent(ev) || onTouchEvent(ev)
     }
 }

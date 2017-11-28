@@ -14,6 +14,7 @@ abstract class ProgressObserver<T>(context: Context, msg: String = "加载中...
 
     init {
         dialog.setMessage(msg)
+        dialog.setCancelable(false)
     }
 
     override fun onSubscribe(d: Disposable) {
@@ -25,6 +26,13 @@ abstract class ProgressObserver<T>(context: Context, msg: String = "加载中...
 
     override fun onComplete() {
         super.onComplete()
+        if (dialog.isShowing) {
+            dialog.dismiss()
+        }
+    }
+
+    override fun onError(e: Throwable) {
+        super.onError(e)
         if (dialog.isShowing) {
             dialog.dismiss()
         }
