@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.jay86.minibox.ui.activity.main.QRScanActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <cn.bingoogolapple.qrcode.zxing.ZXingView
+        android:id="@+id/qrScanner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:qrcv_borderColor="@android:color/white"
+        app:qrcv_cornerColor="@color/colorPrimaryDark"
+        app:qrcv_isCenterVertical="true"
+        app:qrcv_scanLineColor="@color/colorPrimaryDark" />
+
+    <include layout="@layout/toolbar_common" />
+</FrameLayout>

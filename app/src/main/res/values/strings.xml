@@ -18,4 +18,6 @@
     <string name="login_register_hint">还没有账户?</string>
     <string name="login_register_hint2">注册</string>
     <string name="hint_network_error">网络错误</string>
+    <string name="qrscan_title">二维码</string>
+    <string name="qrscan_open_camera_error">打开摄像头失败，请检查权限或摄像头是否已被占用</string>
 </resources>

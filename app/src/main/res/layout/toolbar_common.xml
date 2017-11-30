@@ -7,4 +7,5 @@
     android:background="@drawable/shape_gradient_primary"
     android:fitsSystemWindows="true"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:navigationIcon="@drawable/ic_toolbar_arrow_back"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />

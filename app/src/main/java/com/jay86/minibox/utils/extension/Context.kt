@@ -1,7 +1,9 @@
 package com.jay86.minibox.utils.extension
 
+import android.app.Activity
 import android.content.Context
 import com.jay86.minibox.config.SP_DEFAULT_FILENAME
+import com.tbruyelle.rxpermissions2.RxPermissions
 
 /**
  * Created By jay68 on 2017/11/28.
@@ -35,4 +37,14 @@ fun Context.remove(key: String, name: String = SP_DEFAULT_FILENAME) {
     val editor = getSharedPreferences(name, Context.MODE_PRIVATE).edit()
     editor.remove(key)
     editor.apply()
+}
+
+fun Activity.doPermissionAction(
+        permission: String,
+        action: (() -> Unit)? = null,
+        doOnRefuse: (() -> Unit)? = null
+) {
+    val rxPermissions = RxPermissions(this)
+    if (rxPermissions.isGranted(permission)) action?.invoke()
+    else rxPermissions.request(permission).subscribe { if (it) action?.invoke() else doOnRefuse?.invoke() }
 }
