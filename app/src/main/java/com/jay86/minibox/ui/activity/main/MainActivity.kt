@@ -34,9 +34,9 @@ class MainActivity : BaseActivity() {
         val avatarView = headerView.find<ImageView>(R.id.avatar)
         avatarView.setImageUrl(App.user?.avatar)
 
-        fun onClick(actionIfLogin: (() -> Unit)?) {
+        fun onClick(actionIfLogin: (() -> Unit)) {
             if (App.isLogin) {
-                actionIfLogin!!.invoke()
+                actionIfLogin.invoke()
             } else {
                 activityStart<LoginActivity>(false)
             }

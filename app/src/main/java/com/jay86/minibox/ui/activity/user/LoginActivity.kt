@@ -43,12 +43,12 @@ class LoginActivity : BaseActivity() {
 
     private fun performLogin() {
         when {
-            account.length() < User.ACCOUNT_MIN_LENGTH -> {
+            account.length() !in User.PHONE_LENGTH -> {
                 account.snackbar(resources.getString(R.string.login_hint_error_account))
                 return
             }
 
-            password.length() < User.PASSWORD_MIN_LENGTH -> {
+            password.length() !in User.PASSWORD_LENGTH -> {
                 password.snackbar(resources.getString(R.string.login_hint_error_password))
                 return
             }

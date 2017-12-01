@@ -40,11 +40,11 @@ open class BaseActivity : AppCompatActivity() {
                     WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         }
         LogUtils.v("activity_name", javaClass.name)
+        setTitle(title)
     }
 
-    fun Toolbar.init(listener: View.OnClickListener?) {
+    fun Toolbar.init(listener: View.OnClickListener? = null) {
         setSupportActionBar(this)
-        this@BaseActivity.setTitle(title)
         setNavigationOnClickListener(listener)
     }
 

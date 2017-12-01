@@ -3,10 +3,13 @@
     <color name="colorSplashAppName">#505050</color>
     <color name="colorSplashIntroduce">#1e1e1e</color>
     <color name="colorNavHeaderNickname">@color/colorWhite</color>
-    <color name="ColorLoginRegisterHint">#546E7A</color>
-    <color name="colorLoginRegisterHint2">#263238</color>
+    <color name="ColorLoginRegisterHint">@color/colorBlack_1</color>
+    <color name="colorLoginRegisterHint2">@color/colorBlack_2</color>
     <color name="colorLoginButton">#4C93FF</color>
     <color name="colorLoginButtonText">@color/colorWhite</color>
     <color name="colorLoginForgetPassword">#A1A2A2</color>
     <color name="colorLoginDivider">#ECEFF1</color>
+    <color name="colorRegisterForm">@color/colorBlack_1</color>
+    <color name="colorRegisterButton">#1FA4F6</color>
+    <color name="colorRegisterButtonText">#ECEFF1</color>
 </resources>

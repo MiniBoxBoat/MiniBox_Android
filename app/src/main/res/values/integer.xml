@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="min_phone_length">11</integer>
+    <integer name="max_phone_length">15</integer>
+    <integer name="min_password_length">6</integer>
+    <integer name="max_password_length">20</integer>
+    <integer name="min_username_length">2</integer>
+    <integer name="max_username_length">8</integer>
+    <integer name="verification_code_length">4</integer>
+</resources>
