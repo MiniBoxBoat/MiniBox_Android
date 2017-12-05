@@ -15,6 +15,7 @@ import com.jay86.minibox.R
 import com.jay86.minibox.utils.LogUtils
 import com.jay86.minibox.utils.extension.autoHideKeyBoard
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.startActivityForResult
 
 /**
  * Created by Jay on 2017/10/10.
@@ -63,6 +64,9 @@ open class BaseActivity : AppCompatActivity() {
         startActivity<T>()
         if (finishBefore) finish()
     }
+
+    inline fun <reified T : Activity> Activity.activityStartForResult(requestCode: Int)
+            = startActivityForResult<T>(requestCode)
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         if (ev?.action == MotionEvent.ACTION_DOWN) {

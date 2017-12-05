@@ -5,6 +5,8 @@ import com.jay86.minibox.R
 import com.jay86.minibox.ui.activity.BaseActivity
 
 class UserDetailActivity : BaseActivity() {
+    override val title: String
+        get() = getString(R.string.main_user_detail)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

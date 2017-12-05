@@ -12,4 +12,5 @@
     <color name="colorRegisterForm">@color/colorBlack_1</color>
     <color name="colorRegisterButton">#1FA4F6</color>
     <color name="colorRegisterButtonText">#ECEFF1</color>
+    <color name="colorUserDetailUsername">#262728</color>
 </resources>

@@ -20,7 +20,7 @@ class QRScanActivity : BaseActivity() {
         setContentView(R.layout.activity_qrscan)
         toolbar.init(View.OnClickListener { finish() })
         doPermissionAction(Manifest.permission.CAMERA, { startScan() }) {
-            longToast(resources.getString(R.string.qrscan_open_camera_error))
+            longToast(resources.getString(R.string.common_hint_open_camera_error))
             finish()
         }
     }
@@ -43,7 +43,7 @@ class QRScanActivity : BaseActivity() {
             }
 
             override fun onScanQRCodeOpenCameraError() {
-                longToast(resources.getString(R.string.qrscan_open_camera_error))
+                longToast(resources.getString(R.string.common_hint_open_camera_error))
             }
         })
         qrScanner.startCamera()

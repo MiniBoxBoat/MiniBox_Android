@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">迷你箱</string>
+    <string name="common_hint_network_error">网络错误</string>
+    <string name="common_hint_open_camera_error">打开摄像头失败，请检查权限或摄像头是否已被占用</string>
+    <string name="common_hint_error_password">手机号或密码错误</string>
+    <string name="common_hint_error_account">手机号未注册</string>
+    <string name="common_hint_error_nickname_length">昵称长度应为%1$d-%2$d位</string>
+
     <string name="splash_introduce">拥有米箱，陪她共走远方\n锁住烦恼，和我嬉戏打闹</string>
+
     <string name="main_scan">扫一扫</string>
     <string name="main_my_box">我的箱子</string>
     <string name="main_user_detail">个人资料</string>
@@ -8,24 +15,25 @@
     <string name="main_call_service">客服</string>
     <string name="main_settings">设置</string>
     <string name="main_hint_unlogin">点击登陆</string>
+
     <string name="login_register">还没有账户?注册</string>
     <string name="login_login">登陆</string>
     <string name="login_forget_password">忘记密码</string>
     <string name="login_hint_password">密码</string>
     <string name="login_hint_phone">手机号</string>
-    <string name="login_hint_error_password">手机号或密码错误</string>
-    <string name="login_hint_error_account">此用户不存在</string>
     <string name="login_register_hint">还没有账户?</string>
     <string name="login_register_hint2">注册</string>
-    <string name="hint_network_error">网络错误</string>
+
     <string name="qrscan_title">二维码</string>
-    <string name="qrscan_open_camera_error">打开摄像头失败，请检查权限或摄像头是否已被占用</string>
-    <string name="register_hint_username">请输入用户名</string>
+
+    <string name="register_hint_nickname">请输入昵称</string>
     <string name="register_hint_phone">请输入手机号</string>
     <string name="register_hint_pwd">请输入密码</string>
     <string name="register_title">注册</string>
     <string name="register_hint_code">请输入验证码</string>
     <string name="register_get_code">获取验证码</string>
+
+    <string name="forget_pwd_title">重置密码</string>
 
     <string-array name="gender">
         <item>男</item>
