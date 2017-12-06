@@ -42,7 +42,7 @@
                 tools:src="@drawable/app_logo" />
 
             <TextView
-                android:id="@+id/nickname"
+                android:id="@+id/nicknameView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"

@@ -29,7 +29,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     private fun initNavigationView() {
         val headerView = navigationView.inflateHeaderView(R.layout.nav_header_main)
-        val nicknameView = headerView.find<TextView>(R.id.nickname)
+        val nicknameView = headerView.find<TextView>(R.id.nicknameView)
         nicknameView.text = App.user?.nickname ?: getString(R.string.main_hint_unlogin)
         //todo 默认头像
         val avatarView = headerView.find<ImageView>(R.id.avatar)

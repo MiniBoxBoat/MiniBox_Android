@@ -47,7 +47,7 @@
             app:srcCompat="@drawable/login_logo" />
 
         <LinearLayout
-            android:id="@+id/toRegister"
+            android:id="@+id/toRegisterLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -72,7 +72,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/login"
+            android:id="@+id/loginView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="16dp"
@@ -82,13 +82,13 @@
             android:foreground="?attr/selectableItemBackground"
             android:text="@string/login_login"
             android:textColor="@color/colorLoginButtonText"
-            app:layout_constraintBottom_toTopOf="@+id/toRegister"
+            app:layout_constraintBottom_toTopOf="@+id/toRegisterLayout"
             app:layout_constraintDimensionRatio="6.307"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/password"
+            android:id="@+id/passwordView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -101,20 +101,20 @@
             android:inputType="textPassword"
             android:maxLength="@integer/max_password_length"
             android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="@+id/forgetPassword"
-            app:layout_constraintEnd_toStartOf="@+id/forgetPassword"
+            app:layout_constraintBottom_toBottomOf="@+id/forgetPasswordView"
+            app:layout_constraintEnd_toStartOf="@+id/forgetPasswordView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/forgetPassword" />
+            app:layout_constraintTop_toTopOf="@+id/forgetPasswordView" />
 
         <TextView
-            android:id="@+id/forgetPassword"
+            android:id="@+id/forgetPasswordView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="28dp"
             android:text="@string/login_forget_password"
             android:textColor="@color/colorLoginForgetPassword"
             android:textSize="15sp"
-            app:layout_constraintBottom_toTopOf="@+id/login"
+            app:layout_constraintBottom_toTopOf="@+id/loginView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/bgBottom"
             app:layout_constraintVertical_bias="0.632" />
@@ -126,10 +126,10 @@
             android:background="@color/colorLoginDivider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/password" />
+            app:layout_constraintTop_toBottomOf="@+id/passwordView" />
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/account"
+            android:id="@+id/accountView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="28dp"
@@ -140,9 +140,9 @@
             android:inputType="phone"
             android:maxLength="@integer/max_phone_length"
             android:textSize="15sp"
-            app:layout_constraintBottom_toTopOf="@id/password"
-            app:layout_constraintEnd_toEndOf="@+id/forgetPassword"
-            app:layout_constraintStart_toStartOf="@+id/password" />
+            app:layout_constraintBottom_toTopOf="@id/passwordView"
+            app:layout_constraintEnd_toEndOf="@+id/forgetPasswordView"
+            app:layout_constraintStart_toStartOf="@+id/passwordView" />
 
         <View
             android:layout_width="0dp"
@@ -151,6 +151,6 @@
             android:background="@color/colorLoginDivider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/account" />
+            app:layout_constraintTop_toBottomOf="@+id/accountView" />
     </android.support.constraint.ConstraintLayout>
 </android.support.design.widget.CoordinatorLayout>

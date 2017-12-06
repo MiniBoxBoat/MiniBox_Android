@@ -45,7 +45,7 @@
                 android:paddingTop="45dp">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/nickname"
+                    android:id="@+id/nicknameView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -67,7 +67,7 @@
                     android:background="@color/colorLoginDivider" />
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/phone"
+                    android:id="@+id/phoneView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -88,7 +88,7 @@
                     android:background="@color/colorLoginDivider" />
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/password"
+                    android:id="@+id/passwordView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -120,8 +120,8 @@
                         android:layout_marginEnd="21dp"
                         android:src="@drawable/ic_register_gender" />
 
-                    <android.support.v7.widget.AppCompatSpinner
-                        android:id="@+id/gender"
+                    <Spinner
+                        android:id="@+id/genderView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:entries="@array/gender"
@@ -141,12 +141,12 @@
                     android:orientation="horizontal">
 
                     <android.support.design.widget.TextInputEditText
-                        android:id="@+id/code"
+                        android:id="@+id/codeView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="16dp"
-                        android:layout_toStartOf="@+id/getCode"
+                        android:layout_toStartOf="@+id/getCodeView"
                         android:background="@null"
                         android:drawablePadding="19dp"
                         android:drawableStart="@drawable/ic_register_code"
@@ -157,7 +157,7 @@
                         android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/getCode"
+                        android:id="@+id/getCodeView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -176,7 +176,7 @@
                     android:background="@color/colorLoginDivider" />
 
                 <Button
-                    android:id="@+id/register"
+                    android:id="@+id/registerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="22dp"

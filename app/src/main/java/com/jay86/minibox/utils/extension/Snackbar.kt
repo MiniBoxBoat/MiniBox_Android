@@ -7,12 +7,12 @@ import android.view.View
 /**
  * Created By jay68 on 2017/11/22.
  */
-fun View.snackbar(message: String) {
+fun View.error(message: String) {
     Snackbar.make(this, message, Snackbar.LENGTH_SHORT).show()
 }
 
-fun View.snackbar(@StringRes messageId: Int) {
-    snackbar(resources.getString(messageId))
+fun View.error(@StringRes messageId: Int) {
+    error(resources.getString(messageId))
 }
 
 fun View.longSnackbar(message: String) {
@@ -20,5 +20,5 @@ fun View.longSnackbar(message: String) {
 }
 
 fun View.longSnackbar(@StringRes messageId: Int) {
-    snackbar(resources.getString(messageId))
+    error(resources.getString(messageId))
 }

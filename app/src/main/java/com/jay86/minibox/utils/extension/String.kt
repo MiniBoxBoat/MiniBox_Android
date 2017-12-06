@@ -12,3 +12,5 @@ fun String.md5(): String {
     md.update(toByteArray())
     return BigInteger(1, md.digest()).toString(16)
 }
+
+fun String?.orError(default: String = "") = this ?: default
