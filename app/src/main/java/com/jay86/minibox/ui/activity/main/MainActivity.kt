@@ -17,6 +17,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.find
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
+    lateinit var nicknameView: TextView
+    lateinit var avatarView: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,19 +29,25 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         initNavigationView()
     }
 
-    private fun initNavigationView() {
-        val headerView = navigationView.inflateHeaderView(R.layout.nav_header_main)
-        val nicknameView = headerView.find<TextView>(R.id.nicknameView)
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
         nicknameView.text = App.user?.nickname ?: getString(R.string.main_hint_unlogin)
         //todo 默认头像
-        val avatarView = headerView.find<ImageView>(R.id.avatar)
         avatarView.setImageUrl(App.user?.avatar)
+    }
+
+    private fun initNavigationView() {
+        val headerView = navigationView.inflateHeaderView(R.layout.nav_header_main)
+        nicknameView = headerView.find(R.id.nicknameView)
+        avatarView = headerView.find(R.id.avatar)
 
         nicknameView.setOnClickListener {
             checkLoginBeforeAction {
                 //todo 跳转到个人资料
             }
         }
+
         avatarView.setOnClickListener {
             checkLoginBeforeAction {
                 //todo 换头像
@@ -93,15 +101,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onPause() {
         super.onPause()
         mapView.onPause()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mapView.onResume()
-
-        if (App.isLogin) {
-
-        }
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {

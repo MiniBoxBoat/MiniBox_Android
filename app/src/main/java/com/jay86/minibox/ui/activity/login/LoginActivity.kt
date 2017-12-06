@@ -10,10 +10,7 @@ import com.jay86.minibox.config.SP_USER_KEY
 import com.jay86.minibox.network.RequestManager
 import com.jay86.minibox.ui.activity.BaseActivity
 import com.jay86.minibox.ui.activity.user.RegisterActivity
-import com.jay86.minibox.utils.extension.error
-import com.jay86.minibox.utils.extension.hideKeyBoard
-import com.jay86.minibox.utils.extension.md5
-import com.jay86.minibox.utils.extension.setPreference
+import com.jay86.minibox.utils.extension.*
 import com.jay86.usedmarket.network.observer.ProgressObserver
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -79,8 +76,7 @@ class LoginActivity : BaseActivity() {
 
             override fun onError(e: Throwable) {
                 super.onError(e)
-                //todo 错误处理
-                loginView.error(e.message ?: getString(R.string.common_hint_network_error))
+                loginView.error(e.message.orError(getString(R.string.common_hint_network_error)))
             }
         })
     }
