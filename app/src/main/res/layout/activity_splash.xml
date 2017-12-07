@@ -9,7 +9,7 @@
     tools:ignore="ContentDescription">
 
     <ImageView
-        android:id="@+id/splashImage"
+        android:id="@+id/splashImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"

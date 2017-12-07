@@ -5,6 +5,7 @@ import android.content.Context
 import com.jay86.minibox.config.SP_DEFAULT_FILENAME
 import com.tbruyelle.rxpermissions2.RxPermissions
 
+
 /**
  * Created By jay68 on 2017/11/28.
  */
@@ -47,4 +48,8 @@ fun Activity.doPermissionAction(
     val rxPermissions = RxPermissions(this)
     if (rxPermissions.isGranted(permission)) action?.invoke()
     else rxPermissions.request(permission).subscribe { if (it) action?.invoke() else doOnRefuse?.invoke() }
+}
+
+fun Activity.selectImage() {
+
 }

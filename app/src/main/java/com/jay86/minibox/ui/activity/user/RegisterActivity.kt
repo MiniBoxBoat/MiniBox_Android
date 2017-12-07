@@ -8,9 +8,10 @@ import com.jay86.minibox.bean.User
 import com.jay86.minibox.network.RequestManager
 import com.jay86.minibox.ui.activity.BaseActivity
 import com.jay86.minibox.ui.activity.login.LoginActivity
+import com.jay86.minibox.utils.extension.containsEmpty
 import com.jay86.minibox.utils.extension.error
 import com.jay86.minibox.utils.extension.md5
-import com.jay86.minibox.utils.extension.orError
+import com.jay86.minibox.utils.extension.orDefault
 import com.jay86.usedmarket.network.observer.ProgressObserver
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.toolbar_common.*
@@ -32,6 +33,10 @@ class RegisterActivity : BaseActivity() {
         registerView.setOnClickListener {
             performRegister()
         }
+
+        getCodeView.setOnClickListener {
+            //todo 发送验证码
+        }
     }
 
     private fun check() = when {
@@ -41,7 +46,7 @@ class RegisterActivity : BaseActivity() {
             false
         }
 
-        nicknameView.text.contains("\\s".toRegex()) -> {
+        nicknameView.text.containsEmpty() -> {
             nicknameView.error(getString(R.string.common_hint_error_empty_char))
             false
         }
@@ -91,7 +96,7 @@ class RegisterActivity : BaseActivity() {
 
             override fun onError(e: Throwable) {
                 super.onError(e)
-                registerView.error(e.message.orError(getString(R.string.register_hint_error_default)))
+                registerView.error(e.message.orDefault(getString(R.string.register_hint_error_default)))
             }
         })
     }

@@ -76,7 +76,7 @@ class LoginActivity : BaseActivity() {
 
             override fun onError(e: Throwable) {
                 super.onError(e)
-                loginView.error(e.message.orError(getString(R.string.common_hint_network_error)))
+                loginView.error(e.message.orDefault(getString(R.string.common_hint_network_error)))
             }
         })
     }

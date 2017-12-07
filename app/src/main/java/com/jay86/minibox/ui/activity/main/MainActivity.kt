@@ -12,6 +12,7 @@ import com.jay86.minibox.App
 import com.jay86.minibox.R
 import com.jay86.minibox.ui.activity.BaseActivity
 import com.jay86.minibox.ui.activity.login.LoginActivity
+import com.jay86.minibox.ui.activity.user.UserDetailActivity
 import com.jay86.minibox.utils.extension.setImageUrl
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.find
@@ -33,8 +34,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         super.onResume()
         mapView.onResume()
         nicknameView.text = App.user?.nickname ?: getString(R.string.main_hint_unlogin)
-        //todo 默认头像
-        avatarView.setImageUrl(App.user?.avatar)
+        avatarView.setImageUrl(App.user?.avatar, resources.getDrawable(R.drawable.default_avatar))
+        avatarView.visibility = if (App.isLogin) View.VISIBLE else View.INVISIBLE
     }
 
     private fun initNavigationView() {
@@ -43,9 +44,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         avatarView = headerView.find(R.id.avatar)
 
         nicknameView.setOnClickListener {
-            checkLoginBeforeAction {
-                //todo 跳转到个人资料
-            }
+            checkLoginBeforeAction { activityStart<UserDetailActivity>(false) }
         }
 
         avatarView.setOnClickListener {
@@ -74,7 +73,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         //todo 列表点击事件
         when (item.itemId) {
             R.id.my_box -> checkLoginBeforeAction { }
-            R.id.user_detail -> checkLoginBeforeAction { }
+            R.id.user_detail -> checkLoginBeforeAction { activityStart<UserDetailActivity>(false) }
             R.id.discount -> checkLoginBeforeAction { }
             R.id.call_service -> {
             }

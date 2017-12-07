@@ -60,6 +60,12 @@ object RequestManager {
                 .subscriber(observer)
     }
 
+    fun sendSms(phoneNumber: String, observer: BaseObserver<String>) {
+        apiService.sendSms(phoneNumber)
+                .map { it.nextOrError() }
+                .subscribe(observer)
+    }
+
     private fun <T> ApiWrapper<T>.nextOrError() =
             if (status != REQUEST_SUCCESSFUL) throw ApiException(status, message) else data
 

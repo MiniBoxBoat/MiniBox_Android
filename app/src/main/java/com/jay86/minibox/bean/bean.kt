@@ -17,10 +17,10 @@ data class User(@SerializedName("taken") val token: String,
                 @SerializedName("image") var avatar: String,
                 var phoneNumber: String,
                 var trueName: String,
-                var age: String,
+                var age: Int?,
                 var email: String,
-                var credibility: String,
-                var useTime: String,
+                var credibility: Int?,
+                var useTime: Int?,
                 var sex: String,
                 var password: String) {
     companion object {

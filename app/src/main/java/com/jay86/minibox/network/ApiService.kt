@@ -4,6 +4,7 @@ import com.jay86.minibox.bean.ApiWrapper
 import com.jay86.minibox.bean.User
 import com.jay86.minibox.config.LOGIN
 import com.jay86.minibox.config.REGISTER
+import com.jay86.minibox.config.SEND_SMS
 import io.reactivex.Observable
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -26,4 +27,8 @@ interface ApiService {
                  @Field("phoneNumber") phone: String,
                  @Field("password") password: String,
                  @Field("sex") gender: String): Observable<ApiWrapper<User>>
+
+    @FormUrlEncoded
+    @POST(SEND_SMS)
+    fun sendSms(@Field("phoneNumber") phoneNumber: String): Observable<ApiWrapper<String>>
 }
