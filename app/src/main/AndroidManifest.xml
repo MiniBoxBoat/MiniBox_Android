@@ -10,10 +10,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
-
-    <meta-data
-        android:name="com.amap.api.v2.apikey"
-        android:value="c2af5f1e2911eae11ff4f6a79cfda944" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name=".App"
@@ -23,6 +20,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="c2af5f1e2911eae11ff4f6a79cfda944" />
+
         <activity
             android:name=".ui.activity.SplashActivity"
             android:theme="@style/AppTheme.FullScreen">
@@ -38,6 +39,9 @@
         <activity android:name=".ui.activity.user.RegisterActivity" />
         <activity android:name=".ui.activity.login.ForgetPasswordActivity" />
         <activity android:name=".ui.activity.user.UserDetailActivity" />
+        <activity android:name=".ui.activity.main.SettingActivity" />
+        <activity android:name=".ui.activity.main.MyBoxActivity" />
+        <activity android:name=".ui.activity.main.DiscountActivity"></activity>
     </application>
 
 </manifest>

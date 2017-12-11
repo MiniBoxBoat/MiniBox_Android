@@ -47,7 +47,7 @@ class RegisterActivity : BaseActivity(), Runnable {
         }
 
         if (!phoneView.text.isPhoneNumber()) {
-            phoneView.snackbar(resources.getString(R.string.common_hint_error_phone_number))
+            phoneView.snackbar(getString(R.string.common_hint_error_phone_number))
             return
         }
         getCodeView.isEnabled = false
@@ -68,7 +68,7 @@ class RegisterActivity : BaseActivity(), Runnable {
 
     private fun check() = when {
         nicknameView.length() !in User.NICKNAME_LENGTH -> {
-            val format = resources.getString(R.string.common_hint_error_nickname_length)
+            val format = getString(R.string.common_hint_error_nickname_length)
             nicknameView.snackbar(String.format(format, User.NICKNAME_LENGTH.first, User.NICKNAME_LENGTH.last))
             false
         }
@@ -84,12 +84,12 @@ class RegisterActivity : BaseActivity(), Runnable {
         }
 
         !phoneView.text.isPhoneNumber() -> {
-            phoneView.snackbar(resources.getString(R.string.common_hint_error_phone_number))
+            phoneView.snackbar(getString(R.string.common_hint_error_phone_number))
             false
         }
 
         passwordView.length() !in User.PASSWORD_LENGTH -> {
-            val format = resources.getString(R.string.common_hint_error_password_length)
+            val format = getString(R.string.common_hint_error_password_length)
             passwordView.snackbar(String.format(format, User.PASSWORD_LENGTH.first, User.PASSWORD_LENGTH.last))
             false
         }

@@ -1,5 +1,6 @@
 package com.jay86.minibox.ui.activity.main
 
+import android.Manifest
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.view.Gravity
@@ -15,9 +16,10 @@ import com.jay86.minibox.R
 import com.jay86.minibox.ui.activity.BaseActivity
 import com.jay86.minibox.ui.activity.login.LoginActivity
 import com.jay86.minibox.ui.activity.user.UserDetailActivity
+import com.jay86.minibox.utils.extension.doPermissionAction
 import com.jay86.minibox.utils.extension.setImageUrl
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.find
+import org.jetbrains.anko.*
 
 
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -29,10 +31,15 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //todo 说明请求定位原因的对话框
+
+        doPermissionAction(Manifest.permission.ACCESS_COARSE_LOCATION, doOnRefuse = { finish() })
         toolbar.init(View.OnClickListener { drawerLayout.openDrawer(Gravity.START) })
         mapView.onCreate(savedInstanceState)
         initNavigationView()
         initMap()
+        //todo 定位及箱子地点显示
+        startLocation()
     }
 
     override fun onResume() {
@@ -45,11 +52,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     private fun initMap() {
         aMap = mapView.map
+        aMap.uiSettings.isMyLocationButtonEnabled = true
     }
 
     private fun startLocation() {
         val myLocationStyle = MyLocationStyle()
-        myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_FOLLOW_NO_CENTER)
+        myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_FOLLOW)
         myLocationStyle.interval(2000)
         aMap.setMyLocationStyle(myLocationStyle)
         aMap.isMyLocationEnabled = true
@@ -87,18 +95,27 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        //todo 列表点击事件
         when (item.itemId) {
-            R.id.my_box -> checkLoginBeforeAction { }
+            R.id.my_box -> checkLoginBeforeAction { activityStart<MyBoxActivity>(false) }
             R.id.user_detail -> checkLoginBeforeAction { activityStart<UserDetailActivity>(false) }
-            R.id.discount -> checkLoginBeforeAction { }
-            R.id.call_service -> {
-            }
-            R.id.settings -> {
-            }
+            R.id.discount -> checkLoginBeforeAction { activityStart<DiscountActivity>(false) }
+            R.id.call_service -> callService()
+            R.id.settings -> activityStart<SettingActivity>(false)
         }
         drawerLayout.closeDrawers()
         return true
+    }
+
+    private fun callService() {
+        val phone = "15923565234"
+        alert(message = getString(R.string.main_hint_call_service)) {
+            yesButton {
+                doPermissionAction(Manifest.permission.CALL_PHONE, { makeCall(phone) }) {
+                    longToast(getString(R.string.common_hint_error_make_call_fail) + phone)
+                }
+            }
+            noButton { }
+        }.show()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?) = when (item!!.itemId) {
