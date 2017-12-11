@@ -24,7 +24,6 @@ data class User(@SerializedName("taken") val token: String,
                 var sex: String,
                 var password: String) {
     companion object {
-        val PHONE_LENGTH = 11..15
         val PASSWORD_LENGTH = 6..20
         val NICKNAME_LENGTH = 2..8
         fun toJson(user: User): String = Gson().toJson(user)

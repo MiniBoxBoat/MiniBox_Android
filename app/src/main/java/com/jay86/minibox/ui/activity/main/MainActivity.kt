@@ -8,6 +8,8 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import com.amap.api.maps2d.AMap
+import com.amap.api.maps2d.model.MyLocationStyle
 import com.jay86.minibox.App
 import com.jay86.minibox.R
 import com.jay86.minibox.ui.activity.BaseActivity
@@ -17,9 +19,11 @@ import com.jay86.minibox.utils.extension.setImageUrl
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.find
 
+
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
-    lateinit var nicknameView: TextView
-    lateinit var avatarView: ImageView
+    private lateinit var nicknameView: TextView
+    private lateinit var avatarView: ImageView
+    private lateinit var aMap: AMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +32,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         toolbar.init(View.OnClickListener { drawerLayout.openDrawer(Gravity.START) })
         mapView.onCreate(savedInstanceState)
         initNavigationView()
+        initMap()
     }
 
     override fun onResume() {
@@ -36,6 +41,18 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         nicknameView.text = App.user?.nickname ?: getString(R.string.main_hint_unlogin)
         avatarView.setImageUrl(App.user?.avatar, resources.getDrawable(R.drawable.default_avatar))
         avatarView.visibility = if (App.isLogin) View.VISIBLE else View.INVISIBLE
+    }
+
+    private fun initMap() {
+        aMap = mapView.map
+    }
+
+    private fun startLocation() {
+        val myLocationStyle = MyLocationStyle()
+        myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_FOLLOW_NO_CENTER)
+        myLocationStyle.interval(2000)
+        aMap.setMyLocationStyle(myLocationStyle)
+        aMap.isMyLocationEnabled = true
     }
 
     private fun initNavigationView() {

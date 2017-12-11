@@ -54,13 +54,13 @@ class LoginActivity : BaseActivity() {
 
     private fun performLogin() {
         when {
-            accountView.length() !in User.PHONE_LENGTH -> {
-                accountView.error(resources.getString(R.string.common_hint_error_account))
+            !accountView.text.isPhoneNumber() -> {
+                accountView.snackbar(resources.getString(R.string.common_hint_error_phone_number))
                 return
             }
 
             passwordView.length() !in User.PASSWORD_LENGTH -> {
-                passwordView.error(resources.getString(R.string.common_hint_error_password))
+                passwordView.snackbar(resources.getString(R.string.common_hint_error_password))
                 return
             }
         }
@@ -76,7 +76,7 @@ class LoginActivity : BaseActivity() {
 
             override fun onError(e: Throwable) {
                 super.onError(e)
-                loginView.error(e.message.orDefault(getString(R.string.common_hint_network_error)))
+                loginView.snackbar(e.message.orDefault(getString(R.string.common_hint_network_error)))
             }
         })
     }

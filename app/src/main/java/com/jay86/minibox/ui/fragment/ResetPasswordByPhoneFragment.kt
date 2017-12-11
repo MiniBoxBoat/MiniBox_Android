@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.jay86.minibox.R
-import com.jay86.minibox.bean.User
-import com.jay86.minibox.utils.extension.error
+import com.jay86.minibox.utils.extension.isPhoneNumber
+import com.jay86.minibox.utils.extension.snackbar
 import org.jetbrains.anko.find
 
 class ResetPasswordByPhoneFragment : BaseFragment() {
@@ -18,10 +18,10 @@ class ResetPasswordByPhoneFragment : BaseFragment() {
         val parent = super.onCreateView(inflater, container, savedInstanceState) ?: throw Exception()
         val phone = parent.find<TextInputEditText>(R.id.phoneView)
         parent.find<Button>(R.id.submit).setOnClickListener {
-            if (phone.length() !in User.PHONE_LENGTH) {
-                phone.error("手机号格式错误")
-            } else {
+            if (phone.text.isPhoneNumber()) {
                 //todo 跳转
+            } else {
+                phone.snackbar("手机号格式错误")
             }
         }
         return parent

@@ -6,5 +6,5 @@
     <integer name="max_password_length">20</integer>
     <integer name="min_username_length">2</integer>
     <integer name="max_username_length">8</integer>
-    <integer name="verification_code_length">4</integer>
+    <integer name="verification_code_length">6</integer>
 </resources>

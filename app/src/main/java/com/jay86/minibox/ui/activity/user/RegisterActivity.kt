@@ -1,25 +1,27 @@
 package com.jay86.minibox.ui.activity.user
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.jay86.minibox.R
 import com.jay86.minibox.bean.User
 import com.jay86.minibox.network.RequestManager
+import com.jay86.minibox.network.observer.BaseObserver
 import com.jay86.minibox.ui.activity.BaseActivity
 import com.jay86.minibox.ui.activity.login.LoginActivity
-import com.jay86.minibox.utils.extension.containsEmpty
-import com.jay86.minibox.utils.extension.error
-import com.jay86.minibox.utils.extension.md5
-import com.jay86.minibox.utils.extension.orDefault
+import com.jay86.minibox.utils.extension.*
 import com.jay86.usedmarket.network.observer.ProgressObserver
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.toolbar_common.*
 import org.jetbrains.anko.toast
 
-class RegisterActivity : BaseActivity() {
+class RegisterActivity : BaseActivity(), Runnable {
     override val title: String
         get() = getString(R.string.register_title)
+    private val codeInterval = 30
+    private var code = ""
+    private var getCodeTime = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,41 +37,70 @@ class RegisterActivity : BaseActivity() {
         }
 
         getCodeView.setOnClickListener {
-            //todo 发送验证码
+            sendSms()
         }
+    }
+
+    private fun sendSms() {
+        if (getCodeTime != 0) {
+            return
+        }
+
+        if (!phoneView.text.isPhoneNumber()) {
+            phoneView.snackbar(resources.getString(R.string.common_hint_error_phone_number))
+            return
+        }
+        getCodeView.isEnabled = false
+        getCodeTime = codeInterval
+        getCodeView.postDelayed(this, 1000)
+        RequestManager.sendSms(phoneView.text.toString(), object : BaseObserver<String>() {
+            override fun onNext(_object: String) {
+                super.onNext(_object)
+                code = _object
+            }
+
+            override fun onError(e: Throwable) {
+                super.onError(e)
+                getCodeView.snackbar(getString(R.string.common_hint_error_get_code_fail))
+            }
+        })
     }
 
     private fun check() = when {
         nicknameView.length() !in User.NICKNAME_LENGTH -> {
             val format = resources.getString(R.string.common_hint_error_nickname_length)
-            nicknameView.error(String.format(format, User.NICKNAME_LENGTH.first, User.NICKNAME_LENGTH.last))
+            nicknameView.snackbar(String.format(format, User.NICKNAME_LENGTH.first, User.NICKNAME_LENGTH.last))
             false
         }
 
         nicknameView.text.containsEmpty() -> {
-            nicknameView.error(getString(R.string.common_hint_error_empty_char))
+            nicknameView.snackbar(getString(R.string.common_hint_error_empty_char))
             false
         }
 
         nicknameView.text[0] in '0'..'9' -> {
-            nicknameView.error(getString(R.string.common_hint_error_number_start))
+            nicknameView.snackbar(getString(R.string.common_hint_error_number_start))
             false
         }
 
-        phoneView.length() !in User.PHONE_LENGTH -> {
-            val format = resources.getString(R.string.common_hint_error_phone_length)
-            phoneView.error(String.format(format, User.PHONE_LENGTH.first, User.PHONE_LENGTH.last))
+        !phoneView.text.isPhoneNumber() -> {
+            phoneView.snackbar(resources.getString(R.string.common_hint_error_phone_number))
             false
         }
 
         passwordView.length() !in User.PASSWORD_LENGTH -> {
             val format = resources.getString(R.string.common_hint_error_password_length)
-            passwordView.error(String.format(format, User.PASSWORD_LENGTH.first, User.PASSWORD_LENGTH.last))
+            passwordView.snackbar(String.format(format, User.PASSWORD_LENGTH.first, User.PASSWORD_LENGTH.last))
             false
         }
 
-        codeView.length() != resources.getInteger(R.integer.verification_code_length) -> {
-            codeView.error(getString(R.string.common_hint_error_verification_code))
+        code.isEmpty() -> {
+            codeView.snackbar(getString(R.string.common_hint_error_verification_code))
+            false
+        }
+
+        codeView.text.toString() != code -> {
+            codeView.snackbar(getString(R.string.common_hint_error_verification_code))
             false
         }
 
@@ -96,8 +127,20 @@ class RegisterActivity : BaseActivity() {
 
             override fun onError(e: Throwable) {
                 super.onError(e)
-                registerView.error(e.message.orDefault(getString(R.string.register_hint_error_default)))
+                registerView.snackbar(e.message.orDefault(getString(R.string.register_hint_error_default)))
             }
         })
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun run() {
+        if (getCodeTime > 0) {
+            getCodeView.text = "($getCodeTime s)"
+            --getCodeTime
+            getCodeView.postDelayed(this, 1000)
+        } else {
+            getCodeView.isEnabled = true
+            getCodeView.setText(R.string.register_get_code)
+        }
     }
 }

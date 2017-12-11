@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit
  * Created by Jay on 2017/10/10.
  */
 object RequestManager {
-    const val REQUEST_SUCCESSFUL = "200"
+    private const val REQUEST_SUCCESSFUL = "200"
     private const val DEFAULT_TIME_OUT = 30
 
     private val apiService: ApiService
@@ -63,7 +63,7 @@ object RequestManager {
     fun sendSms(phoneNumber: String, observer: BaseObserver<String>) {
         apiService.sendSms(phoneNumber)
                 .map { it.nextOrError() }
-                .subscribe(observer)
+                .subscriber(observer)
     }
 
     private fun <T> ApiWrapper<T>.nextOrError() =
