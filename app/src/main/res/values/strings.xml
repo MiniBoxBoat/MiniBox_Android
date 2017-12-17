@@ -45,6 +45,10 @@
     <string name="forget_pwd_title">重置密码</string>
     <string name="setting_title">设置</string>
     <string name="common_hint_error_make_call_fail">拨打电话失败，您可以选择手动拨打：</string>
+    <string name="user_detail_default_email">未填写</string>
+    <string name="user_detail_default_real_name">未实名</string>
+    <string name="user_detail_use_time">使用次数</string>
+    <string name="user_detail_credit">信誉</string>
 
     <string-array name="gender">
         <item>男</item>

@@ -26,7 +26,8 @@ interface ApiService {
     fun register(@Field("userName") nickname: String,
                  @Field("phoneNumber") phone: String,
                  @Field("password") password: String,
-                 @Field("sex") gender: String): Observable<ApiWrapper<User>>
+                 @Field("sex") sex: String,
+                 @Field("verifyCode") verifyCode: String): Observable<ApiWrapper<User>>
 
     @FormUrlEncoded
     @POST(SEND_SMS)

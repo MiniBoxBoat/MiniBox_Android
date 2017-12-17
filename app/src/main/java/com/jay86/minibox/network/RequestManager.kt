@@ -54,8 +54,8 @@ object RequestManager {
                 .subscriber(observer)
     }
 
-    fun register(nickname: String, phone: String, password: String, gender: String, observer: BaseObserver<User>) {
-        apiService.register(nickname, phone, password, gender)
+    fun register(nickname: String, phone: String, password: String, sex: String, verifyCode: String, observer: BaseObserver<User>) {
+        apiService.register(nickname, phone, password, sex, verifyCode)
                 .map { it.nextOrError() }
                 .subscriber(observer)
     }

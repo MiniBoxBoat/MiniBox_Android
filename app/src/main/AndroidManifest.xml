@@ -41,7 +41,7 @@
         <activity android:name=".ui.activity.user.UserDetailActivity" />
         <activity android:name=".ui.activity.main.SettingActivity" />
         <activity android:name=".ui.activity.main.MyBoxActivity" />
-        <activity android:name=".ui.activity.main.DiscountActivity"></activity>
+        <activity android:name=".ui.activity.main.DiscountActivity" />
     </application>
 
 </manifest>

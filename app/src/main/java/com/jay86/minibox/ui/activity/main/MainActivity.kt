@@ -66,7 +66,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private fun initNavigationView() {
         val headerView = navigationView.inflateHeaderView(R.layout.nav_header_main)
         nicknameView = headerView.find(R.id.nicknameView)
-        avatarView = headerView.find(R.id.avatar)
+        avatarView = headerView.find(R.id.avatarView)
 
         nicknameView.setOnClickListener {
             checkLoginBeforeAction { activityStart<UserDetailActivity>(false) }

@@ -21,9 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
             <ImageView
-                android:id="@+id/edit"
+                android:id="@+id/editUserView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +30,7 @@
                 app:srcCompat="@drawable/ic_user_detail_edit" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/avatar"
+                android:id="@+id/avatarView"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="16dp"
@@ -49,9 +48,142 @@
                 android:layout_marginTop="24dp"
                 android:textColor="@color/colorUserDetailUsername"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/avatar"
-                app:layout_constraintTop_toBottomOf="@+id/avatar"
+                app:layout_constraintStart_toStartOf="@+id/avatarView"
+                app:layout_constraintTop_toBottomOf="@+id/avatarView"
                 tools:text="Jay" />
+
+            <ScrollView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toTopOf="@id/creditView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nicknameView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingEnd="38dp"
+                    android:paddingStart="38dp">
+
+                    <TextView
+                        android:id="@+id/phoneView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/colorBlack_3"
+                        android:textSize="15sp"
+                        tools:text="15923565234" />
+
+                    <View
+                        android:id="@+id/phoneDivider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorBlack_3" />
+
+                    <TextView
+                        android:id="@+id/genderView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/colorBlack_3"
+                        android:textSize="15sp"
+                        tools:text="男" />
+
+                    <View
+                        android:id="@+id/genderDivider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorBlack_3" />
+
+                    <TextView
+                        android:id="@+id/emailView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/colorBlack_3"
+                        android:textSize="15sp"
+                        tools:text="me@jay86.com" />
+
+                    <View
+                        android:id="@+id/emailDivider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorBlack_3" />
+
+                    <TextView
+                        android:id="@+id/realView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/colorBlack_3"
+                        android:textSize="15sp"
+                        tools:text="李吉" />
+
+                    <View
+                        android:id="@+id/realDivider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/colorBlack_3" />
+                </LinearLayout>
+            </ScrollView>
+
+            <View
+                android:id="@+id/decoration"
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:background="#4C93FF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/useTimeHint"
+                app:layout_constraintStart_toStartOf="@+id/creditHint" />
+
+            <TextView
+                android:id="@+id/creditHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:layout_marginStart="32dp"
+                android:text="@string/user_detail_credit"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/creditView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                app:layout_constraintBottom_toTopOf="@+id/creditHint"
+                app:layout_constraintEnd_toEndOf="@+id/creditHint"
+                app:layout_constraintStart_toStartOf="@+id/creditHint"
+                tools:text="100" />
+
+            <TextView
+                android:id="@+id/useTimeHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="@string/user_detail_use_time"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/creditHint"
+                app:layout_constraintStart_toEndOf="@+id/creditHint"
+                app:layout_constraintTop_toTopOf="@id/creditHint" />
+
+            <TextView
+                android:id="@+id/useTimeView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                app:layout_constraintBottom_toTopOf="@+id/useTimeHint"
+                app:layout_constraintEnd_toEndOf="@+id/useTimeHint"
+                app:layout_constraintStart_toStartOf="@+id/useTimeHint"
+                tools:text="10" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

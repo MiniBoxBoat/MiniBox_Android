@@ -13,4 +13,6 @@
     <color name="colorRegisterButton">#1FA4F6</color>
     <color name="colorRegisterButtonText">#ECEFF1</color>
     <color name="colorUserDetailUsername">#262728</color>
+    <color name="colorUserDetailForm">@color/colorBlack_3</color>
+    <color name="colorUserDetailDivider">@color/colorBlack_3</color>
 </resources>

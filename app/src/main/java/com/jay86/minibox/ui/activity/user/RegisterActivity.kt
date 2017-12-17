@@ -114,7 +114,8 @@ class RegisterActivity : BaseActivity(), Runnable {
         val phone = phoneView.text.toString()
         val password = passwordView.text.toString()
         val gender = genderView.selectedItem.toString()
-        RequestManager.register(nickname, phone, password.md5(), gender, object : ProgressObserver<User>(this) {
+        val code = codeView.text.toString()
+        RequestManager.register(nickname, phone, password.md5(), gender, code, object : ProgressObserver<User>(this) {
             override fun onNext(_object: User) {
                 super.onNext(_object)
                 toast(getString(R.string.register_register_successful))
