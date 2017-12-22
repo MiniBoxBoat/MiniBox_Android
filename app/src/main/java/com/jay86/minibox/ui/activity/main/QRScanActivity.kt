@@ -19,10 +19,13 @@ class QRScanActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qrscan)
         toolbar.init(View.OnClickListener { finish() })
-        doPermissionAction(Manifest.permission.CAMERA, { startScan() }) {
-            longToast(resources.getString(R.string.common_hint_open_camera_error))
-            finish()
-        }
+        doPermissionAction(Manifest.permission.CAMERA, getString(R.string.common_hint_request_camera),
+                action = { startScan() },
+                doOnRefuse = {
+                    longToast(resources.getString(R.string.common_hint_open_camera_error))
+                    finish()
+                }
+        )
     }
 
     override fun onStop() {

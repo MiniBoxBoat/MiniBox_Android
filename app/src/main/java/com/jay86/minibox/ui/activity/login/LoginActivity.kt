@@ -1,5 +1,6 @@
 package com.jay86.minibox.ui.activity.login
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
@@ -16,8 +17,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity() {
     companion object {
-        val REQUEST_CODE = 0x1f
-        val RESULT_CODE = 0x2f
+        val REQUEST_CODE = 0x1
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +28,7 @@ class LoginActivity : BaseActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_CODE) {
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
             accountView.setText(data?.getStringExtra("phone") ?: "")
             passwordView.setText(data?.getStringExtra("password") ?: "")
         }
@@ -76,7 +76,7 @@ class LoginActivity : BaseActivity() {
 
             override fun onError(e: Throwable) {
                 super.onError(e)
-                loginView.snackbar(e.message.orDefault(getString(R.string.common_hint_network_error)))
+                loginView.snackbar(e.message ?: getString(R.string.common_hint_network_error))
             }
         })
     }

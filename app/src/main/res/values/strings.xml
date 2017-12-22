@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">迷你箱</string>
+    <string name="app_name">米你箱</string>
     <string name="common_hint_network_error">请求失败，请检查网络</string>
     <string name="common_hint_open_camera_error">打开摄像头失败，请检查权限或摄像头是否已被占用</string>
     <string name="common_hint_error_password">手机号或密码错误</string>
@@ -11,6 +11,12 @@
     <string name="common_hint_error_empty_char">昵称中不能有空字符</string>
     <string name="common_hint_error_number_start">昵称不能以数字开头</string>
     <string name="common_hint_error_get_code_fail">获取验证码失败</string>
+    <string name="common_hint_error_make_call_fail">拨打电话失败，您可以选择手动拨打：</string>
+    <string name="common_hint_request_location">为了更好的为您服务需要获取您的位置信息</string>
+    <string name="common_hint_request_call">此操作需要先获取拨打电话的权限</string>
+    <string name="common_hint_request_camera">此操作需要先获取您的相机权限</string>
+    <string name="common_hint_request_storage">此操作需要先获取访问您存储空间的权限</string>
+    <string name="common_error_open_album_fail">需要您的存储权限才能访问哟~</string>
 
     <string name="splash_introduce">拥有米箱，陪她共走远方\n锁住烦恼，和我嬉戏打闹</string>
 
@@ -44,11 +50,11 @@
 
     <string name="forget_pwd_title">重置密码</string>
     <string name="setting_title">设置</string>
-    <string name="common_hint_error_make_call_fail">拨打电话失败，您可以选择手动拨打：</string>
     <string name="user_detail_default_email">未填写</string>
     <string name="user_detail_default_real_name">未实名</string>
     <string name="user_detail_use_time">使用次数</string>
     <string name="user_detail_credit">信誉</string>
+    <string name="common_error_crop_image_fail">剪裁图片失败</string>
 
     <string-array name="gender">
         <item>男</item>

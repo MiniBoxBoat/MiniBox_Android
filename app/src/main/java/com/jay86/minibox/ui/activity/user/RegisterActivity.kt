@@ -1,6 +1,7 @@
 package com.jay86.minibox.ui.activity.user
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -9,8 +10,10 @@ import com.jay86.minibox.bean.User
 import com.jay86.minibox.network.RequestManager
 import com.jay86.minibox.network.observer.BaseObserver
 import com.jay86.minibox.ui.activity.BaseActivity
-import com.jay86.minibox.ui.activity.login.LoginActivity
-import com.jay86.minibox.utils.extension.*
+import com.jay86.minibox.utils.extension.containsEmpty
+import com.jay86.minibox.utils.extension.isPhoneNumber
+import com.jay86.minibox.utils.extension.md5
+import com.jay86.minibox.utils.extension.snackbar
 import com.jay86.usedmarket.network.observer.ProgressObserver
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.toolbar_common.*
@@ -122,13 +125,13 @@ class RegisterActivity : BaseActivity(), Runnable {
                 val intent = Intent()
                 intent.putExtra("phone", phone)
                 intent.putExtra("password", password)
-                setResult(LoginActivity.RESULT_CODE, intent)
+                setResult(Activity.RESULT_OK, intent)
                 finish()
             }
 
             override fun onError(e: Throwable) {
                 super.onError(e)
-                registerView.snackbar(e.message.orDefault(getString(R.string.register_hint_error_default)))
+                registerView.snackbar(e.message ?: getString(R.string.register_hint_error_default))
             }
         })
     }

@@ -4,11 +4,13 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.content.Context
+import android.os.Environment
 import com.jay86.minibox.bean.User
 import com.jay86.minibox.config.SP_USER_KEY
 import com.jay86.minibox.network.RequestManager
 import com.jay86.minibox.network.observer.BaseObserver
 import com.jay86.minibox.utils.extension.getPreference
+import java.io.File
 
 /**
  * Created by Jay68 on 2017/11/20.
@@ -21,6 +23,7 @@ class App : Application() {
 
         var user: User? = null
         val isLogin get() = user != null
+        val fileHome = "${Environment.getExternalStorageDirectory()}/minibox"
 
         fun addActivity(activity: Activity) {
             activityContainer += activity.javaClass.name to activity
@@ -35,7 +38,15 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         context = applicationContext
+        initFile()
         login()
+    }
+
+    private fun initFile() {
+        val homeFile = File(fileHome)
+        val picFile = File(homeFile, "pic")
+        if (!homeFile.exists()) homeFile.mkdir()
+        if (!picFile.exists()) picFile.mkdir()
     }
 
     private fun login() {

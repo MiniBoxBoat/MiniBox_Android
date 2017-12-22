@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Context
 import com.jay86.minibox.config.SP_DEFAULT_FILENAME
 import com.tbruyelle.rxpermissions2.RxPermissions
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.yesButton
 
 
 /**
@@ -42,12 +44,21 @@ fun Context.remove(key: String, name: String = SP_DEFAULT_FILENAME) {
 
 fun Activity.doPermissionAction(
         permission: String,
+        reason: String,
         action: (() -> Unit)? = null,
         doOnRefuse: (() -> Unit)? = null
 ) {
-    val rxPermissions = RxPermissions(this)
-    if (rxPermissions.isGranted(permission)) action?.invoke()
-    else rxPermissions.request(permission).subscribe { if (it) action?.invoke() else doOnRefuse?.invoke() }
+    val rxPermissions = RxPermissions(this@doPermissionAction)
+    if (rxPermissions.isGranted(permission)) {
+        action?.invoke()
+        return
+    }
+    alert(message = reason) {
+        yesButton {
+            rxPermissions.request(permission).subscribe { if (it) action?.invoke() else doOnRefuse?.invoke() }
+        }
+        onCancelled { rxPermissions.request(permission).subscribe { if (it) action?.invoke() else doOnRefuse?.invoke() } }
+    }.show()
 }
 
 fun Activity.selectImage() {
