@@ -34,3 +34,5 @@ data class User(@SerializedName("taken") val token: String,
         return toJson(this)
     }
 }
+
+data class BoxGroup(val empty: Int)

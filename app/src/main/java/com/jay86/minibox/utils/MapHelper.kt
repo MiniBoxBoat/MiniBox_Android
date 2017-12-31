@@ -43,23 +43,21 @@ class MapHelper(val aMap: AMap) : AMap.OnMyLocationChangeListener, AMap.OnCamera
         }
     }
 
-    override fun onMyLocationChange(p0: Location?) {
-        curLocation = p0
-    }
-
-    override fun onCameraChangeFinish(p0: CameraPosition?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onCameraChange(p0: CameraPosition?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     private val AMap.isCenterLocked: Boolean
         get() = myLocationStyle?.myLocationType == LOCATION_TYPE_CENTER
 
     private fun AMap.lockCenter(isLock: Boolean) {
         myLocationStyle = myLocationStyle
                 .myLocationType(if (isLock) LOCATION_TYPE_CENTER else LOCATION_TYPE_NO_CENTER)
+    }
+
+    override fun onMyLocationChange(p0: Location?) {
+        curLocation = p0
+    }
+
+    override fun onCameraChangeFinish(p0: CameraPosition?) {
+    }
+
+    override fun onCameraChange(p0: CameraPosition?) {
     }
 }

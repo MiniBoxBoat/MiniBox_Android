@@ -55,6 +55,7 @@
     <string name="user_detail_use_time">使用次数</string>
     <string name="user_detail_credit">信誉</string>
     <string name="common_error_crop_image_fail">剪裁图片失败</string>
+    <string name="main_search">搜索</string>
 
     <string-array name="gender">
         <item>男</item>

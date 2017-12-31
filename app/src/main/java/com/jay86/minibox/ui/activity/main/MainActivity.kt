@@ -187,6 +187,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             activityStart<QRScanActivity>(false)
             true
         }
+
+        R.id.search -> {
+            activityStart<SearchActivity>(false)
+            toolbar.visibility = View.INVISIBLE
+            true
+        }
         else -> false
     }
 
