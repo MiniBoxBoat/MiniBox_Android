@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.support.design.widget.NavigationView
 import android.view.Gravity
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
@@ -21,9 +20,7 @@ import com.jay86.minibox.ui.activity.BaseActivity
 import com.jay86.minibox.ui.activity.login.LoginActivity
 import com.jay86.minibox.ui.activity.user.UserDetailActivity
 import com.jay86.minibox.utils.MapHelper
-import com.jay86.minibox.utils.extension.doPermissionAction
-import com.jay86.minibox.utils.extension.reset
-import com.jay86.minibox.utils.extension.uri
+import com.jay86.minibox.utils.extension.*
 import com.yalantis.ucrop.UCrop
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.*
@@ -48,8 +45,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         doPermissionAction(Manifest.permission.ACCESS_COARSE_LOCATION, getString(R.string.common_hint_request_location),
                 doOnRefuse = { finish() }
         )
-        toolbar.init(View.OnClickListener { drawerLayout.openDrawer(Gravity.START) })
         mapView.onCreate(savedInstanceState)
+        initView()
         initMap()
         initNavigationView()
     }
@@ -58,13 +55,23 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         super.onResume()
         mapView.onResume()
         nicknameView.text = App.user?.nickname ?: getString(R.string.main_hint_unlogin)
-//        avatarView.setImageUrl(App.user?.avatar, resources.getDrawable(R.drawable.default_avatar))
+        //todo 头像获取
+        avatarView.setImageUrl(App.user?.avatar, resources.getDrawable(R.drawable.default_avatar))
         avatarView.visibility = if (App.isLogin) View.VISIBLE else View.INVISIBLE
     }
 
+    private fun initView() {
+        openMenu.setOnClickListener { drawerLayout.openDrawer(Gravity.START) }
+        qrScanner.setOnClickListener { activityStart<QRScanActivity>(false) }
+        //todo search
+        searchView.hideKeyBoard()
+        searchView.setOnClickListener { }
+    }
+
     private fun initMap() {
-        mapHelper = MapHelper(mapView.map)
+        mapHelper = MapHelper(mapView.map, this)
         mapHelper.init()
+        myLocationButton.setOnClickListener { mapHelper.myLocation() }
     }
 
     private fun initNavigationView() {
@@ -165,11 +172,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         //todo updateAvatar
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main_toolbar, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.my_box -> checkLoginBeforeAction { activityStart<MyBoxActivity>(false) }
@@ -180,20 +182,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
         drawerLayout.closeDrawers()
         return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?) = when (item!!.itemId) {
-        R.id.qr_scan -> {
-            activityStart<QRScanActivity>(false)
-            true
-        }
-
-        R.id.search -> {
-            activityStart<SearchActivity>(false)
-            toolbar.visibility = View.INVISIBLE
-            true
-        }
-        else -> false
     }
 
     override fun onDestroy() {

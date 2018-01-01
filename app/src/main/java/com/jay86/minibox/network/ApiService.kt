@@ -1,9 +1,11 @@
 package com.jay86.minibox.network
 
 import com.jay86.minibox.bean.ApiWrapper
+import com.jay86.minibox.bean.BoxGroup
 import com.jay86.minibox.bean.User
 import com.jay86.minibox.config.LOGIN
 import com.jay86.minibox.config.REGISTER
+import com.jay86.minibox.config.SEARCH_BY_POINT
 import com.jay86.minibox.config.SEND_SMS
 import io.reactivex.Observable
 import retrofit2.http.Field
@@ -32,4 +34,10 @@ interface ApiService {
     @FormUrlEncoded
     @POST(SEND_SMS)
     fun sendSms(@Field("phoneNumber") phoneNumber: String): Observable<ApiWrapper<String>>
+
+    @FormUrlEncoded
+    @POST(SEARCH_BY_POINT)
+    fun searchByPoint(@Field("lat") lat: Double, @Field("lng") lng: Double): Observable<ApiWrapper<List<BoxGroup>>>
+
+
 }

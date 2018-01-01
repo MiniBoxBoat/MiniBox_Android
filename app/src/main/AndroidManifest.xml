@@ -60,6 +60,7 @@
         <activity
             android:name=".ui.activity.main.SearchActivity"
             android:theme="@style/AppTheme.TransparentBackground" />
+        <activity android:name=".ui.activity.order.OrderActivity"></activity>
     </application>
 
 </manifest>

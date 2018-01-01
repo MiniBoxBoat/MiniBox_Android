@@ -2,6 +2,7 @@ package com.jay86.minibox.network
 
 import com.jay86.minibox.BuildConfig
 import com.jay86.minibox.bean.ApiWrapper
+import com.jay86.minibox.bean.BoxGroup
 import com.jay86.minibox.bean.User
 import com.jay86.minibox.config.BASE_URL
 import com.jay86.minibox.network.observer.BaseObserver
@@ -62,6 +63,12 @@ object RequestManager {
 
     fun sendSms(phoneNumber: String, observer: BaseObserver<String>) {
         apiService.sendSms(phoneNumber)
+                .map { it.nextOrError() }
+                .subscriber(observer)
+    }
+
+    fun searchByPoint(lat: Double, lng: Double, observer: Observer<List<BoxGroup>>) {
+        apiService.searchByPoint(lat, lng)
                 .map { it.nextOrError() }
                 .subscriber(observer)
     }
