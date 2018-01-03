@@ -44,6 +44,11 @@ open class BaseActivity : AppCompatActivity() {
         setTitle(title)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        App.removeActivity(javaClass)
+    }
+
     fun Toolbar.init(listener: View.OnClickListener? = null) {
         setSupportActionBar(this)
         setNavigationOnClickListener(listener)

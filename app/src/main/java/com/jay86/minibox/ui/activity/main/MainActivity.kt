@@ -33,16 +33,16 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         val OPEN_CAMERA = 0x2
     }
 
+    private lateinit var mapHelper: MapHelper
     private lateinit var nicknameView: TextView
     private lateinit var avatarView: ImageView
-    private lateinit var mapHelper: MapHelper
     private lateinit var cameraCacheFile: File
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        doPermissionAction(Manifest.permission.ACCESS_COARSE_LOCATION, getString(R.string.common_hint_request_location),
+        doPermissionActionWithHint(Manifest.permission.ACCESS_FINE_LOCATION, getString(R.string.common_hint_request_location),
                 doOnRefuse = { finish() }
         )
         mapView.onCreate(savedInstanceState)
@@ -103,7 +103,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     private fun getImageFromAlbum() {
-        doPermissionAction(Manifest.permission.WRITE_EXTERNAL_STORAGE, getString(R.string.common_hint_request_storage),
+        doPermissionActionWithHint(Manifest.permission.WRITE_EXTERNAL_STORAGE, getString(R.string.common_hint_request_storage),
                 action = {
                     val intent = Intent(Intent.ACTION_PICK)
                     intent.setDataAndType(MediaStore.Images.Media.INTERNAL_CONTENT_URI, "image/*")
@@ -114,7 +114,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     private fun getImageFromCamera() {
-        doPermissionAction(Manifest.permission.CAMERA, getString(R.string.common_hint_request_camera),
+        doPermissionActionWithHint(Manifest.permission.CAMERA, getString(R.string.common_hint_request_camera),
                 action = {
                     cameraCacheFile = File("${App.fileHome}/pic", "${System.currentTimeMillis()}.png")
                     val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -137,7 +137,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         val phone = "15923565234"
         alert(message = getString(R.string.main_hint_call_service)) {
             yesButton {
-                doPermissionAction(Manifest.permission.CALL_PHONE, getString(R.string.common_hint_request_call),
+                doPermissionActionWithHint(Manifest.permission.CALL_PHONE, getString(R.string.common_hint_request_call),
                         action = { makeCall(phone) },
                         doOnRefuse = { longToast(getString(R.string.common_hint_error_make_call_fail) + phone) }
                 )

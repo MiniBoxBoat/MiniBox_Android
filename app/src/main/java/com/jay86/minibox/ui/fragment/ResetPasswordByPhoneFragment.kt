@@ -14,8 +14,8 @@ import org.jetbrains.anko.find
 class ResetPasswordByPhoneFragment : BaseFragment() {
     override val layoutId: Int = R.layout.fragment_reset_password_by_phone
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val parent = super.onCreateView(inflater, container, savedInstanceState) ?: throw Exception()
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        val parent = super.onCreateView(inflater, container, savedInstanceState)
         val phone = parent.find<TextInputEditText>(R.id.phoneView)
         parent.find<Button>(R.id.submit).setOnClickListener {
             if (phone.text.isPhoneNumber()) {

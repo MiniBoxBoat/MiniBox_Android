@@ -2,6 +2,11 @@ package com.jay86.minibox.utils.extension
 
 import android.app.Activity
 import android.content.Context
+import android.os.Bundle
+import android.os.Parcelable
+import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
+import com.jay86.minibox.R
 import com.jay86.minibox.config.SP_DEFAULT_FILENAME
 import com.tbruyelle.rxpermissions2.RxPermissions
 import org.jetbrains.anko.alert
@@ -42,9 +47,27 @@ fun Context.remove(key: String, name: String = SP_DEFAULT_FILENAME) {
     editor.apply()
 }
 
-fun Activity.doPermissionAction(
+fun Activity.doPermissionActionWithHint(
         permission: String,
         reason: String,
+        action: (() -> Unit)? = null,
+        doOnRefuse: (() -> Unit)? = null
+) {
+    val rxPermissions = RxPermissions(this@doPermissionActionWithHint)
+    if (rxPermissions.isGranted(permission)) {
+        action?.invoke()
+        return
+    }
+    alert(message = reason) {
+        yesButton {
+            doPermissionAction(permission, action, doOnRefuse)
+        }
+        onCancelled { doPermissionAction(permission, action, doOnRefuse) }
+    }.show()
+}
+
+fun Activity.doPermissionAction(
+        permission: String,
         action: (() -> Unit)? = null,
         doOnRefuse: (() -> Unit)? = null
 ) {
@@ -53,14 +76,19 @@ fun Activity.doPermissionAction(
         action?.invoke()
         return
     }
-    alert(message = reason) {
-        yesButton {
-            rxPermissions.request(permission).subscribe { if (it) action?.invoke() else doOnRefuse?.invoke() }
-        }
-        onCancelled { rxPermissions.request(permission).subscribe { if (it) action?.invoke() else doOnRefuse?.invoke() } }
-    }.show()
+    rxPermissions.request(permission).subscribe { if (it) action?.invoke() else doOnRefuse?.invoke() }
 }
 
-fun Activity.selectImage() {
-
+fun <T : Parcelable> AppCompatActivity.replaceFragment(fragment: Fragment, vararg argument: Pair<String, T>) {
+    if (argument.isNotEmpty()) {
+        val bundle = Bundle()
+        argument.forEach {
+            bundle.putParcelable(it.first, it.second)
+        }
+        fragment.arguments = bundle
+    }
+    val fragmentManager = supportFragmentManager
+    val transaction = fragmentManager.beginTransaction()
+    transaction.replace(R.id.fragmentContainer, fragment)
+    transaction.commit()
 }

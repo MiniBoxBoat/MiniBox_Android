@@ -57,9 +57,31 @@
     <string name="common_error_crop_image_fail">剪裁图片失败</string>
     <string name="main_search">搜索</string>
     <string name="main_hint_search">搜索地点</string>
+    <string name="order_sure">确定</string>
 
     <string-array name="gender">
         <item>男</item>
         <item>女</item>
+    </string-array>
+
+    <string-array name="order_open_time">
+        <item>15分钟</item>
+        <item>30分钟</item>
+        <item>45分钟</item>
+        <item>1小时</item>
+        <item>2小时</item>
+        <item>3小时</item>
+    </string-array>
+
+    <string-array name="order_use_time">
+        <item>30分钟</item>
+        <item>1小时</item>
+        <item>2小时</item>
+        <item>3小时</item>
+    </string-array>
+
+    <string-array name="order_box_type">
+        <item>大</item>
+        <item>小</item>
     </string-array>
 </resources>

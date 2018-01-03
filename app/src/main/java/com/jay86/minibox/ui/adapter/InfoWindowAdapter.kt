@@ -7,8 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.amap.api.maps.AMap
 import com.amap.api.maps.model.Marker
+import com.jay86.minibox.App
 import com.jay86.minibox.R
 import com.jay86.minibox.bean.BoxGroup
+import com.jay86.minibox.ui.activity.main.MainActivity
 import com.jay86.minibox.ui.activity.order.OrderActivity
 import org.jetbrains.anko.find
 
@@ -27,6 +29,7 @@ class InfoWindowAdapter(private val activity: Activity) : AMap.InfoWindowAdapter
         container.find<TextView>(R.id.largeEmpty).text = boxGroup.largeEmpty.toString()
         container.find<TextView>(R.id.smallEmpty).text = boxGroup.smallEmpty.toString()
         container.find<ImageView>(R.id.openBox).setOnClickListener {
+            val mainActivity = App.getActivity(MainActivity::class.java)
             OrderActivity.activityStart(activity, boxGroup)
         }
         return container

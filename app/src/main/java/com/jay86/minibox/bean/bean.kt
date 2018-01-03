@@ -46,7 +46,6 @@ data class BoxGroup(val groupId: String,
                     @SerializedName("emptyLargeBoxNum") val largeEmpty: Int,
                     @SerializedName("emptySmallBoxNum") val smallEmpty: Int,
                     @SerializedName("quantity") val sum: Int) : Parcelable {
-
     constructor(parcel: Parcel) : this(
             parcel.readString(),
             parcel.readDouble(),
@@ -54,23 +53,7 @@ data class BoxGroup(val groupId: String,
             parcel.readString(),
             parcel.readInt(),
             parcel.readInt(),
-            parcel.readInt())
-
-    companion object {
-        @JvmStatic
-        val CREATOR: Parcelable.Creator<BoxGroup> = object : Parcelable.Creator<BoxGroup> {
-            override fun createFromParcel(parcel: Parcel): BoxGroup {
-                return BoxGroup(parcel)
-            }
-
-            override fun newArray(size: Int): Array<BoxGroup?> {
-                return arrayOfNulls(size)
-            }
-        }
-
-        fun toJson(boxGroup: BoxGroup): String = Gson().toJson(boxGroup)
-
-        fun fromJson(json: String): BoxGroup? = Gson().fromJson(json, BoxGroup::class.java)
+            parcel.readInt()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -85,5 +68,19 @@ data class BoxGroup(val groupId: String,
 
     override fun describeContents(): Int {
         return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<BoxGroup> {
+        override fun createFromParcel(parcel: Parcel): BoxGroup {
+            return BoxGroup(parcel)
+        }
+
+        override fun newArray(size: Int): Array<BoxGroup?> {
+            return arrayOfNulls(size)
+        }
+
+        fun toJson(boxGroup: BoxGroup): String = Gson().toJson(boxGroup)
+
+        fun fromJson(json: String): BoxGroup? = Gson().fromJson(json, BoxGroup::class.java)
     }
 }

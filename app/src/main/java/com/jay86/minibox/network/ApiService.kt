@@ -3,14 +3,9 @@ package com.jay86.minibox.network
 import com.jay86.minibox.bean.ApiWrapper
 import com.jay86.minibox.bean.BoxGroup
 import com.jay86.minibox.bean.User
-import com.jay86.minibox.config.LOGIN
-import com.jay86.minibox.config.REGISTER
-import com.jay86.minibox.config.SEARCH_BY_POINT
-import com.jay86.minibox.config.SEND_SMS
+import com.jay86.minibox.config.*
 import io.reactivex.Observable
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 /**
  * api接口
@@ -39,5 +34,6 @@ interface ApiService {
     @POST(SEARCH_BY_POINT)
     fun searchByPoint(@Field("lat") lat: Double, @Field("lng") lng: Double): Observable<ApiWrapper<List<BoxGroup>>>
 
-
+    @GET(SHOW_BOX_GROUP)
+    fun showBoxGroup(@Query("groupId") groupId: String): Observable<ApiWrapper<BoxGroup>>
 }

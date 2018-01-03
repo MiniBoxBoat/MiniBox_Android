@@ -73,6 +73,12 @@ object RequestManager {
                 .subscriber(observer)
     }
 
+    fun showBoxGroup(groupId: String, observer: Observer<BoxGroup>) {
+        apiService.showBoxGroup(groupId)
+                .map { it.nextOrError() }
+                .subscriber(observer)
+    }
+
     private fun <T> ApiWrapper<T>.nextOrError() =
             if (status != REQUEST_SUCCESSFUL) throw ApiException(status, message) else data
 

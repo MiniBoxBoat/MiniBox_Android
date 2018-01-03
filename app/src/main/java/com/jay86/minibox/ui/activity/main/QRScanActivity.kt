@@ -8,7 +8,7 @@ import com.jay86.minibox.R
 import com.jay86.minibox.config.QR_KEY
 import com.jay86.minibox.ui.activity.BaseActivity
 import com.jay86.minibox.ui.activity.order.OrderActivity
-import com.jay86.minibox.utils.extension.doPermissionAction
+import com.jay86.minibox.utils.extension.doPermissionActionWithHint
 import kotlinx.android.synthetic.main.activity_qrscan.*
 import kotlinx.android.synthetic.main.toolbar_common.*
 import org.jetbrains.anko.longToast
@@ -41,7 +41,7 @@ class QRScanActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        doPermissionAction(Manifest.permission.CAMERA, getString(R.string.common_hint_request_camera),
+        doPermissionActionWithHint(Manifest.permission.CAMERA, getString(R.string.common_hint_request_camera),
                 action = { startScan() },
                 doOnRefuse = {
                     longToast(resources.getString(R.string.common_hint_open_camera_error))

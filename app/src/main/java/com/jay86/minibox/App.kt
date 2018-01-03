@@ -29,10 +29,15 @@ class App : Application() {
             activityContainer += activity.javaClass.name to activity
         }
 
-        fun finishActivity(name: String) {
-            val activity = activityContainer.remove(name)
+        fun <T : Activity> getActivity(key: Class<T>) =
+                if (activityContainer.containsKey(key.name)) activityContainer[key.name] as T else null
+
+        fun finishActivity(key: Class<Activity>) {
+            val activity = removeActivity(key)
             activity?.finish()
         }
+
+        fun removeActivity(key: Class<Activity>) = activityContainer.remove(key.name)
     }
 
     override fun onCreate() {

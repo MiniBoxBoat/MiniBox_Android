@@ -19,8 +19,8 @@ class ResetPasswordVerifyCodeFragment : BaseFragment() {
     override val layoutId: Int = R.layout.fragment_reset_password_verify_code
     private lateinit var phoneNumber: String
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val parent = super.onCreateView(inflater, container, savedInstanceState) ?: throw Exception()
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        val parent = super.onCreateView(inflater, container, savedInstanceState)
         //todo 事件
         return parent
     }
