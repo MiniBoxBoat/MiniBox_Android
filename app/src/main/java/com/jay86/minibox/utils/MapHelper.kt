@@ -13,7 +13,6 @@ import com.jay86.minibox.network.RequestManager
 import com.jay86.minibox.network.observer.BaseObserver
 import com.jay86.minibox.ui.adapter.InfoWindowAdapter
 import com.jay86.minibox.utils.extension.animateCamera
-import com.jay86.minibox.utils.extension.isCenterLocked
 import com.jay86.minibox.utils.extension.lockCenter
 import com.jay86.minibox.utils.extension.showMarker
 
@@ -21,7 +20,7 @@ import com.jay86.minibox.utils.extension.showMarker
 /**
  * Created By jay68 on 2017/12/17.
  */
-class MapHelper(private val aMap: AMap, private val activity: Activity) : AMap.OnMyLocationChangeListener,
+class MapHelper(val aMap: AMap, private val activity: Activity) : AMap.OnMyLocationChangeListener,
         AMap.OnCameraChangeListener, AMap.OnInfoWindowClickListener, AMap.OnMapTouchListener {
 
     private var curLocation: Location? = null
@@ -59,13 +58,9 @@ class MapHelper(private val aMap: AMap, private val activity: Activity) : AMap.O
 
     fun myLocation() = aMap.lockCenter(true)
 
-
     override fun onTouch(p0: MotionEvent?) {
         when (p0?.action) {
-            MotionEvent.ACTION_MOVE -> {
-                if (aMap.isCenterLocked) aMap.lockCenter(false)
-                aMap.infoWindowAnimationManager.setInfoWindowBackEnable(false)
-            }
+            MotionEvent.ACTION_MOVE -> aMap.lockCenter(false)
 
             MotionEvent.ACTION_UP -> curMarker?.hideInfoWindow()
         }

@@ -67,6 +67,12 @@ object RequestManager {
                 .subscriber(observer)
     }
 
+    fun searchByDestination(destination: String, observer: Observer<List<BoxGroup>>) {
+        apiService.searchByDestination(destination)
+                .map { it.nextOrError() }
+                .subscriber(observer)
+    }
+
     fun searchByPoint(lat: Double, lng: Double, observer: Observer<List<BoxGroup>>) {
         apiService.searchByPoint(lat, lng)
                 .map { it.nextOrError() }

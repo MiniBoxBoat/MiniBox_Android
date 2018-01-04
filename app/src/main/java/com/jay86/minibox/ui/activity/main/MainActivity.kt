@@ -16,6 +16,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.jay86.minibox.App
 import com.jay86.minibox.R
+import com.jay86.minibox.bean.BoxGroup
 import com.jay86.minibox.ui.activity.BaseActivity
 import com.jay86.minibox.ui.activity.login.LoginActivity
 import com.jay86.minibox.ui.activity.user.UserDetailActivity
@@ -31,6 +32,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     companion object {
         val OPEN_ALBUM = 0x1
         val OPEN_CAMERA = 0x2
+        val OPEN_SEARCH = 0x3
     }
 
     private lateinit var mapHelper: MapHelper
@@ -64,8 +66,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         openMenu.setOnClickListener { drawerLayout.openDrawer(Gravity.START) }
         qrScanner.setOnClickListener { activityStart<QRScanActivity>(false) }
         //todo search
-        searchView.hideKeyBoard()
-        searchView.setOnClickListener { }
+        searchView.setOnClickListener {
+            activityStartForResult<SearchActivity>(OPEN_SEARCH)
+            searchBar.visibility = View.GONE
+        }
     }
 
     private fun initMap() {
@@ -83,11 +87,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             checkLoginBeforeAction { activityStart<UserDetailActivity>(false) }
         }
 
-        avatarView.setOnClickListener {
+        //todo 切换头像
+        /*avatarView.setOnClickListener {
             checkLoginBeforeAction {
                 showSelectDialog()
             }
-        }
+        }*/
 
         navigationView.setNavigationItemSelectedListener(this)
     }
@@ -148,6 +153,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == OPEN_SEARCH)
+            searchBar.visibility = View.VISIBLE
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 OPEN_CAMERA, OPEN_ALBUM -> {
@@ -158,9 +165,17 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                             .withMaxResultSize(800, 800)
                             .start(this)
                 }
+
                 UCrop.REQUEST_CROP -> {
                     val bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(UCrop.getOutput(data!!)))
                     updateAvatar(bitmap)
+                }
+
+                OPEN_SEARCH -> {
+                    val boxGroup = data!!.getParcelableArrayListExtra<BoxGroup>("data")
+                    if (boxGroup != null && boxGroup.isNotEmpty()) {
+                        mapHelper.aMap.moveToMarker(boxGroup[0])
+                    }
                 }
             }
         } else if (resultCode == UCrop.RESULT_ERROR) {
@@ -176,7 +191,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         when (item.itemId) {
             R.id.my_box -> checkLoginBeforeAction { activityStart<MyBoxActivity>(false) }
             R.id.user_detail -> checkLoginBeforeAction { activityStart<UserDetailActivity>(false) }
-            R.id.discount -> checkLoginBeforeAction { activityStart<DiscountActivity>(false) }
+            R.id.discount -> {
+                //todo 优惠卷
+                toast("功能开发中...")
+//                checkLoginBeforeAction { activityStart<DiscountActivity>(false) }
+            }
             R.id.call_service -> callService()
             R.id.settings -> activityStart<SettingActivity>(false)
         }

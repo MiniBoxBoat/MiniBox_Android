@@ -17,6 +17,7 @@ import com.jay86.minibox.ui.fragment.ImmediatelyFragment
 import com.jay86.minibox.utils.LocationUtils
 import com.jay86.minibox.utils.extension.moveCamera
 import com.jay86.minibox.utils.extension.replaceFragment
+import com.jay86.minibox.utils.extension.showMarker
 import com.jay86.usedmarket.network.observer.ProgressObserver
 import kotlinx.android.synthetic.main.activity_order.*
 import org.jetbrains.anko.longToast
@@ -85,7 +86,10 @@ class OrderActivity : BaseActivity(), View.OnClickListener {
     private fun initMap(savedInstanceState: Bundle?) {
         mapView.onCreate(savedInstanceState)
         val amap = mapView.map
-        amap.moveCamera(boxGroup!!.lat, boxGroup!!.lng)
+        amap.apply {
+            moveCamera(boxGroup!!.lat, boxGroup!!.lng, 18f)
+            showMarker(boxGroup!!)
+        }
         amap.uiSettings.apply {
             isZoomControlsEnabled = false
             isMyLocationButtonEnabled = false
@@ -123,6 +127,10 @@ class OrderActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun performImmediately() {
+        if (!allowImmediately()) {
+            longToast("即时订单需要您距离箱子位置不超过 $MAX_DISTANCE 米")
+            return
+        }
         //todo 即时
     }
 

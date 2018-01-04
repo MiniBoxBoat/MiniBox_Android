@@ -34,6 +34,10 @@ interface ApiService {
     @POST(SEARCH_BY_POINT)
     fun searchByPoint(@Field("lat") lat: Double, @Field("lng") lng: Double): Observable<ApiWrapper<List<BoxGroup>>>
 
+    @FormUrlEncoded
+    @POST(SHOW_BOX_GROUP)
+    fun searchByDestination(@Field("destination") destination: String): Observable<ApiWrapper<List<BoxGroup>>>
+
     @GET(SHOW_BOX_GROUP)
     fun showBoxGroup(@Query("groupId") groupId: String): Observable<ApiWrapper<BoxGroup>>
 }
