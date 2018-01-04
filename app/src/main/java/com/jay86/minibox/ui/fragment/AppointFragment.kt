@@ -25,7 +25,7 @@ open class AppointFragment : BaseFragment(), View.OnClickListener {
         boxGroup = args!!.getParcelable("boxGroup")
     }
 
-    open fun getOrderInfo() = listOf(
+    open fun getOrderInfo() = hashMapOf(
             "boxCount" to boxCount.text.toString(),
             "boxSize" to boxType.selectedItem.toString(),
             "openTime" to openTime.selectedItem.toString(),

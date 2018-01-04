@@ -85,6 +85,19 @@ object RequestManager {
                 .subscriber(observer)
     }
 
+    fun appoint(userId: String, userName: String, phoneNumber: String, groupId: String,
+                boxSize: String, openTime: String, useTime: String, observer: Observer<String>) {
+        apiService.appoint(userId, userName, phoneNumber, groupId, boxSize, openTime, useTime)
+                .map { it.nextOrError() }
+                .subscriber(observer)
+    }
+
+    fun order(userId: String, groupId: String, boxSize: String, token: String, observer: Observer<String>) {
+        apiService.order(userId, groupId, boxSize, token)
+                .map { it.nextOrError() }
+                .subscriber(observer)
+    }
+
     private fun <T> ApiWrapper<T>.nextOrError() =
             if (status != REQUEST_SUCCESSFUL) throw ApiException(status, message) else data
 

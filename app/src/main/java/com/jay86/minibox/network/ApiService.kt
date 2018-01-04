@@ -40,4 +40,21 @@ interface ApiService {
 
     @GET(SHOW_BOX_GROUP)
     fun showBoxGroup(@Query("groupId") groupId: String): Observable<ApiWrapper<BoxGroup>>
+
+    @FormUrlEncoded
+    @POST(APPOINT)
+    fun appoint(@Field("userId") userId: String,
+                @Field("userName") userName: String,
+                @Field("phoneNumber") phoneNumber: String,
+                @Field("groupId") groupId: String,
+                @Field("boxSize") boxSize: String,
+                @Field("openTime") openTime: String,
+                @Field("useTime") useTime: String): Observable<ApiWrapper<String>>
+
+    @FormUrlEncoded
+    @POST(ORDER)
+    fun order(@Field("userId") userId: String,
+              @Field("groupId") groupId: String,
+              @Field("boxSize") boxSize: String,
+              @Field("token") token: String): Observable<ApiWrapper<String>>
 }

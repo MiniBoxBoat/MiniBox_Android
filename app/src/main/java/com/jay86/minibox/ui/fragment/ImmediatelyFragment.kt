@@ -13,7 +13,7 @@ import org.jetbrains.anko.find
  */
 class ImmediatelyFragment : AppointFragment(), View.OnClickListener {
 
-    override fun getOrderInfo() = listOf(
+    override fun getOrderInfo() = hashMapOf(
             "boxCount" to boxCount.text.toString(),
             "boxSize" to boxType.selectedItem.toString()
     )
