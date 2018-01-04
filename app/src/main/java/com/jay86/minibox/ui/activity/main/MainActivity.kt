@@ -197,12 +197,15 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             R.id.my_box -> checkLoginBeforeAction { activityStart<MyBoxActivity>(false) }
             R.id.user_detail -> checkLoginBeforeAction { activityStart<UserDetailActivity>(false) }
             R.id.discount -> {
-                //todo 优惠卷
-                toast("功能开发中...")
-//                checkLoginBeforeAction { activityStart<DiscountActivity>(false) }
+                checkLoginBeforeAction { activityStart<DiscountActivity>(false) }
             }
             R.id.call_service -> callService()
-            R.id.settings -> activityStart<SettingActivity>(false)
+            R.id.settings -> {
+                //todo 设置
+//                activityStart<SettingActivity>(false)
+                App.logout()
+                activityStart<LoginActivity>(false)
+            }
         }
         drawerLayout.closeDrawers()
         return true

@@ -4,6 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 /**
  * Created By jay68 on 2017/11/21.
@@ -39,6 +40,65 @@ data class User(@SerializedName("taken") val token: String,
     }
 }
 
+data class Box(val boxId: String, val boxSize: String, val boxStatus: String,
+               val groupName: String, val openTime: String, val lat: Double, val lng: Double) : Parcelable {
+    constructor(parcel: Parcel) : this(
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readDouble(),
+            parcel.readDouble())
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(boxId)
+        parcel.writeString(boxSize)
+        parcel.writeString(boxStatus)
+        parcel.writeString(groupName)
+        parcel.writeString(openTime)
+        parcel.writeDouble(lat)
+        parcel.writeDouble(lng)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Box> {
+        override fun createFromParcel(parcel: Parcel): Box {
+            return Box(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Box?> {
+            return arrayOfNulls(size)
+        }
+    }
+
+    private fun usedMinutes(): Long {
+        val split = openTime.split("-", " ", ":", ".")
+        val now = GregorianCalendar()
+        val openTime = GregorianCalendar(split[0].toInt(), split[1].toInt(), split[2].toInt(),
+                split[3].toInt(), split[4].toInt(), split[5].toInt())
+        return (now.timeInMillis - openTime.timeInMillis) / 1000 / 60
+    }
+
+    //todo calc price
+    val price: Double get() = usedMinutes() * 0.5
+
+    val usedTime: String
+        get() {
+            val usedMinutes = usedMinutes().toInt()
+            val hour = usedMinutes / 60
+            val minute = usedMinutes % 60
+            return when {
+                hour == 0 -> "${minute}分钟"
+                minute == 0 -> "${hour}小时"
+                else -> "${hour}小时${minute}分钟"
+            }
+        }
+}
+
 data class BoxGroup(val groupId: String,
                     val lat: Double,
                     val lng: Double,
@@ -53,8 +113,7 @@ data class BoxGroup(val groupId: String,
             parcel.readString(),
             parcel.readInt(),
             parcel.readInt(),
-            parcel.readInt()) {
-    }
+            parcel.readInt())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(groupId)

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="13dp"
+    android:layout_marginEnd="15dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginTop="13dp"
+    android:background="@color/colorWhite"
+    android:foreground="?attr/selectableItemBackground">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp">
+
+
+        <TextView
+            android:id="@+id/boxType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:textColor="#3D87ED"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="小" />
+
+        <TextView
+            android:id="@+id/boxTypeSuffix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="型迷你箱"
+            android:textColor="#3D87ED"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/boxType"
+            app:layout_constraintStart_toEndOf="@+id/boxType"
+            app:layout_constraintTop_toTopOf="@+id/boxType" />
+
+        <TextView
+            android:id="@+id/boxIdSuffix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginTop="12dp"
+            android:text="号箱"
+            android:textColor="#3E87ED"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/boxId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#3E87ED"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/boxIdSuffix"
+            app:layout_constraintEnd_toStartOf="@+id/boxIdSuffix"
+            app:layout_constraintTop_toTopOf="@+id/boxIdSuffix"
+            tools:text="128" />
+
+        <TextView
+            android:id="@+id/priceSuffix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="元"
+            android:textColor="#222222"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/boxIdSuffix"
+            app:layout_constraintTop_toBottomOf="@+id/boxIdSuffix" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ED2929"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/priceSuffix"
+            app:layout_constraintEnd_toStartOf="@+id/priceSuffix"
+            app:layout_constraintTop_toTopOf="@+id/priceSuffix"
+            tools:text="10.3" />
+
+        <TextView
+            android:id="@+id/pricePrefix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="共花费"
+            android:textColor="#222222"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/priceSuffix"
+            app:layout_constraintEnd_toStartOf="@+id/price"
+            app:layout_constraintTop_toTopOf="@+id/priceSuffix" />
+
+        <TextView
+            android:id="@+id/useTimePrefix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已使用："
+            android:textColor="#444444"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/priceSuffix"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/priceSuffix" />
+
+        <TextView
+            android:id="@+id/useTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#444444"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/useTimePrefix"
+            app:layout_constraintStart_toEndOf="@+id/useTimePrefix"
+            app:layout_constraintTop_toTopOf="@+id/useTimePrefix"
+            tools:text="10小时" />
+
+        <TextView
+            android:id="@+id/groupNamePrefix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="所在位置："
+            android:textColor="#222222"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/groupName" />
+
+        <TextView
+            android:id="@+id/groupName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="12dp"
+            android:ellipsize="end"
+            android:textColor="#222222"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/groupNamePrefix"
+            app:layout_constraintTop_toBottomOf="@+id/useTimePrefix"
+            tools:text="重庆市南岸区江南大道协信星光时代广场4F" />
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

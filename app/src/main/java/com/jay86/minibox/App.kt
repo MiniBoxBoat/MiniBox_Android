@@ -10,6 +10,7 @@ import com.jay86.minibox.config.SP_USER_KEY
 import com.jay86.minibox.network.RequestManager
 import com.jay86.minibox.network.observer.BaseObserver
 import com.jay86.minibox.utils.extension.getPreference
+import com.jay86.minibox.utils.extension.setPreference
 import org.jetbrains.anko.toast
 import java.io.File
 
@@ -28,6 +29,12 @@ class App : Application() {
         var onLoginStateChangeListener: ((isLogin: Boolean) -> Unit)? = null
 
         val fileHome = "${Environment.getExternalStorageDirectory()}/minibox"
+
+        fun logout() {
+            user = null
+            onLoginStateChangeListener?.invoke(false)
+            context.setPreference(SP_USER_KEY, "")
+        }
 
         fun addActivity(activity: Activity) {
             activityContainer += activity.javaClass.name to activity

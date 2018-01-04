@@ -1,9 +1,6 @@
 package com.jay86.minibox.network
 
-import com.jay86.minibox.bean.ApiWrapper
-import com.jay86.minibox.bean.BoxGroup
-import com.jay86.minibox.bean.ObjectApiWrapper
-import com.jay86.minibox.bean.User
+import com.jay86.minibox.bean.*
 import com.jay86.minibox.config.*
 import io.reactivex.Observable
 import retrofit2.http.*
@@ -50,12 +47,20 @@ interface ApiService {
                 @Field("groupId") groupId: String,
                 @Field("boxSize") boxSize: String,
                 @Field("openTime") openTime: String,
-                @Field("useTime") useTime: String): Observable<ApiWrapper>
+                @Field("useTime") useTime: String,
+                @Field("boxNum") boxNum: String): Observable<ApiWrapper>
 
     @FormUrlEncoded
     @POST(ORDER)
     fun order(@Field("userId") userId: String,
               @Field("groupId") groupId: String,
               @Field("boxSize") boxSize: String,
-              @Field("taken") token: String): Observable<ObjectApiWrapper<String>>
+              @Field("taken") token: String,
+              @Field("boxNum") boxNum: String): Observable<ObjectApiWrapper<List<String>>>
+
+    @GET(SHOW_USING_BOX)
+    fun showUsingBox(@Query("taken") token: String): Observable<ObjectApiWrapper<List<Box>>>
+
+    @GET(SHOW_APPOINTING_BOX)
+    fun showAppointingBox(@Query("taken") token: String): Observable<ObjectApiWrapper<List<Box>>>
 }

@@ -160,12 +160,15 @@ class OrderActivity : BaseActivity(), View.OnClickListener {
         val user = App.user
         if (user == null) {
             toast("登陆过期，请重新登陆")
+            App.logout()
             activityStart<LoginActivity>()
             return
         }
 
         RequestManager.appoint(user.id, user.nickname, user.phoneNumber,
-                boxGroup!!.groupId, params["boxSize"]!!, openTime, "${useTimeApi[useTimeName.indexOf(params["useTime"])]}", object : BaseObserver<Unit>() {
+                boxGroup!!.groupId, params["boxSize"]!!, openTime,
+                "${useTimeApi[useTimeName.indexOf(params["useTime"])]}", params["boxCount"]!!,
+                object : BaseObserver<Unit>() {
 
             override fun onNext(_object: Unit) {
                 super.onNext(_object)
@@ -175,6 +178,12 @@ class OrderActivity : BaseActivity(), View.OnClickListener {
 
             override fun onError(e: Throwable) {
                 super.onError(e)
+                if (e.message == "用户认证错误") {
+                    toast("登陆过期，请重新登陆")
+                    App.logout()
+                    activityStart<LoginActivity>()
+                    return
+                }
                 toast(e.message ?: "网络异常")
             }
         })
@@ -194,15 +203,22 @@ class OrderActivity : BaseActivity(), View.OnClickListener {
         }
 
         val params = immediatelyFragment.getOrderInfo()
-        RequestManager.order(user.id, boxGroup!!.groupId, params["boxSize"]!!, user.token, object : BaseObserver<String>() {
-            override fun onNext(_object: String) {
+        RequestManager.order(user.id, boxGroup!!.groupId, params["boxSize"]!!, user.token, params["boxCount"]!!,
+                object : BaseObserver<List<String>>() {
+                    override fun onNext(_object: List<String>) {
                 super.onNext(_object)
-                toast("下单成功，您的箱子号码：$_object")
+                        toast("下单成功，您的箱子号码：${_object.joinToString(",")}")
                 finish()
             }
 
             override fun onError(e: Throwable) {
                 super.onError(e)
+                if (e.message == "用户认证错误") {
+                    toast("登陆过期，请重新登陆")
+                    App.logout()
+                    activityStart<LoginActivity>()
+                    return
+                }
                 toast(e.message ?: "网络异常")
             }
         })

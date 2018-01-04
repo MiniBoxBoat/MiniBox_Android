@@ -1,10 +1,7 @@
 package com.jay86.minibox.network
 
 import com.jay86.minibox.BuildConfig
-import com.jay86.minibox.bean.ApiWrapper
-import com.jay86.minibox.bean.BoxGroup
-import com.jay86.minibox.bean.ObjectApiWrapper
-import com.jay86.minibox.bean.User
+import com.jay86.minibox.bean.*
 import com.jay86.minibox.config.BASE_URL
 import com.jay86.minibox.network.observer.BaseObserver
 import io.reactivex.Observable
@@ -87,14 +84,26 @@ object RequestManager {
     }
 
     fun appoint(userId: String, userName: String, phoneNumber: String, groupId: String,
-                boxSize: String, openTime: String, useTime: String, observer: Observer<Unit>) {
-        apiService.appoint(userId, userName, phoneNumber, groupId, boxSize, openTime, useTime)
+                boxSize: String, openTime: String, useTime: String, boxNum: String, observer: Observer<Unit>) {
+        apiService.appoint(userId, userName, phoneNumber, groupId, boxSize, openTime, useTime, boxNum)
                 .map { it.nextOrError() }
                 .subscriber(observer)
     }
 
-    fun order(userId: String, groupId: String, boxSize: String, token: String, observer: Observer<String>) {
-        apiService.order(userId, groupId, boxSize, token)
+    fun order(userId: String, groupId: String, boxSize: String, token: String, boxNum: String, observer: Observer<List<String>>) {
+        apiService.order(userId, groupId, boxSize, token, boxNum)
+                .map { it.nextOrError() }
+                .subscriber(observer)
+    }
+
+    fun showUsingBox(token: String, observer: Observer<List<Box>>) {
+        apiService.showUsingBox(token)
+                .map { it.nextOrError() }
+                .subscriber(observer)
+    }
+
+    fun showAppointingBox(token: String, observer: Observer<List<Box>>) {
+        apiService.showAppointingBox(token)
                 .map { it.nextOrError() }
                 .subscriber(observer)
     }
