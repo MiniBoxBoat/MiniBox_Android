@@ -11,6 +11,7 @@ import com.jay86.minibox.R
 import com.jay86.minibox.bean.BoxGroup
 import kotlinx.android.synthetic.main.fragment_appoint.*
 import org.jetbrains.anko.find
+import org.jetbrains.anko.toast
 
 /**
  * Created By jay68 on 2018/1/2.
@@ -33,7 +34,7 @@ open class AppointFragment : BaseFragment(), View.OnClickListener {
     )
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val parent = super.onCreateView(inflater, container, savedInstanceState)
+        val parent = super.onCreateView(inflater, container, savedInstanceState)!!
 
         val boxType = parent.find<Spinner>(R.id.boxType)
 
@@ -47,12 +48,18 @@ open class AppointFragment : BaseFragment(), View.OnClickListener {
         minus.setOnClickListener(this)
 
         val boxCount = parent.find<TextView>(R.id.boxCount)
+        if (boxGroup.largeEmpty == 0) boxType.setSelection(1)
         boxType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) = Unit
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 var count = boxCount.text.toString().toInt()
                 val maxCount = if (position == 0) boxGroup.largeEmpty else boxGroup.smallEmpty
+                if (maxCount == 0) {
+                    boxType.setSelection((position + 1) % 2)
+                    activity.toast("没有${if (position == 0) "大" else "小"}箱子了")
+                    return
+                }
                 if (count >= maxCount) {
                     count = maxCount
                     plus.isEnabled = false

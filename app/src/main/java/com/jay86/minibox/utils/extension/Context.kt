@@ -10,12 +10,23 @@ import com.jay86.minibox.R
 import com.jay86.minibox.config.SP_DEFAULT_FILENAME
 import com.tbruyelle.rxpermissions2.RxPermissions
 import org.jetbrains.anko.alert
+import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.startActivityForResult
 import org.jetbrains.anko.yesButton
 
 
 /**
  * Created By jay68 on 2017/11/28.
  */
+
+inline fun <reified T : Activity> Activity.activityStart(finishBefore: Boolean = true) {
+    startActivity<T>()
+    if (finishBefore) finish()
+}
+
+inline fun <reified T : Activity> Activity.activityStartForResult(requestCode: Int)
+        = startActivityForResult<T>(requestCode)
+
 fun Context.setPreference(key: String, value: Any?, name: String = SP_DEFAULT_FILENAME) {
     val editor = getSharedPreferences(name, Context.MODE_PRIVATE).edit()
     when (value) {

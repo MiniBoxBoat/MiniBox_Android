@@ -20,7 +20,7 @@ class ResetPasswordVerifyCodeFragment : BaseFragment() {
     private lateinit var phoneNumber: String
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val parent = super.onCreateView(inflater, container, savedInstanceState)
+        val parent = super.onCreateView(inflater, container, savedInstanceState)!!
         //todo 事件
         return parent
     }

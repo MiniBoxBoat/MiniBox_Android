@@ -3,6 +3,7 @@ package com.jay86.minibox.network
 import com.jay86.minibox.BuildConfig
 import com.jay86.minibox.bean.ApiWrapper
 import com.jay86.minibox.bean.BoxGroup
+import com.jay86.minibox.bean.ObjectApiWrapper
 import com.jay86.minibox.bean.User
 import com.jay86.minibox.config.BASE_URL
 import com.jay86.minibox.network.observer.BaseObserver
@@ -86,7 +87,7 @@ object RequestManager {
     }
 
     fun appoint(userId: String, userName: String, phoneNumber: String, groupId: String,
-                boxSize: String, openTime: String, useTime: String, observer: Observer<String>) {
+                boxSize: String, openTime: String, useTime: String, observer: Observer<Unit>) {
         apiService.appoint(userId, userName, phoneNumber, groupId, boxSize, openTime, useTime)
                 .map { it.nextOrError() }
                 .subscriber(observer)
@@ -98,8 +99,11 @@ object RequestManager {
                 .subscriber(observer)
     }
 
-    private fun <T> ApiWrapper<T>.nextOrError() =
+    private fun <T> ObjectApiWrapper<T>.nextOrError() =
             if (status != REQUEST_SUCCESSFUL) throw ApiException(status, message) else data
+
+    private fun ApiWrapper.nextOrError() =
+            if (status != REQUEST_SUCCESSFUL) throw ApiException(status, message) else Unit
 
     private fun <T> Observable<T>.subscriber(observer: Observer<T>) {
         subscribeOn(Schedulers.io())

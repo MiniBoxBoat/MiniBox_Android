@@ -74,10 +74,12 @@
     </string-array>
 
     <string-array name="order_use_time">
-        <item>30分钟</item>
         <item>1小时</item>
         <item>2小时</item>
         <item>3小时</item>
+        <item>4小时</item>
+        <item>5小时</item>
+        <item>6小时</item>
     </string-array>
 
     <string-array name="order_box_type">

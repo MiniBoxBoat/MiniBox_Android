@@ -8,15 +8,18 @@ import android.view.View
 import com.amap.api.maps.AMapUtils
 import com.amap.api.maps.model.LatLng
 import com.jay86.minibox.App
+import com.jay86.minibox.BuildConfig
 import com.jay86.minibox.R
 import com.jay86.minibox.bean.BoxGroup
 import com.jay86.minibox.network.RequestManager
 import com.jay86.minibox.network.observer.BaseObserver
 import com.jay86.minibox.ui.activity.BaseActivity
+import com.jay86.minibox.ui.activity.login.LoginActivity
 import com.jay86.minibox.ui.activity.main.QRScanActivity
 import com.jay86.minibox.ui.fragment.AppointFragment
 import com.jay86.minibox.ui.fragment.ImmediatelyFragment
 import com.jay86.minibox.utils.LocationUtils
+import com.jay86.minibox.utils.extension.activityStart
 import com.jay86.minibox.utils.extension.moveCamera
 import com.jay86.minibox.utils.extension.replaceFragment
 import com.jay86.minibox.utils.extension.showMarker
@@ -25,6 +28,7 @@ import kotlinx.android.synthetic.main.activity_order.*
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
+import java.text.SimpleDateFormat
 import java.util.*
 
 class OrderActivity : BaseActivity(), View.OnClickListener {
@@ -53,7 +57,7 @@ class OrderActivity : BaseActivity(), View.OnClickListener {
     private lateinit var useTimeName: Array<String>
 
     private val openTimeApi = arrayOf(15, 30, 45, 60, 120, 180)
-    private val useTimeApi = arrayOf(30, 60, 120, 180)
+    private val useTimeApi = arrayOf(1, 2, 3, 4, 5, 6)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +74,11 @@ class OrderActivity : BaseActivity(), View.OnClickListener {
                 override fun onNext(_object: BoxGroup) {
                     super.onNext(_object)
                     boxGroup = _object
+                    if (_object.largeEmpty == 0 && _object.smallEmpty == 0) {
+                        this@OrderActivity.toast("这里的箱子没有可用的箱子了")
+                        finish()
+                        return
+                    }
                     initView()
                     initMap(savedInstanceState)
                 }
@@ -118,7 +127,7 @@ class OrderActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun loadImmediately() {
-        if (!allowImmediately()) {
+        if (!BuildConfig.DEBUG && !allowImmediately()) {
             longToast("即时订单需要您距离箱子位置不超过 $MAX_DISTANCE 米")
             return
         }
@@ -137,22 +146,28 @@ class OrderActivity : BaseActivity(), View.OnClickListener {
 
     private fun performAppoint() {
         val params = appointFragment.getOrderInfo()
-
-        val useDate = GregorianCalendar()
-        useDate.add(Calendar.MINUTE, useTimeApi[useTimeName.indexOf(params["useTime"])])
-        val useTime = "${useDate.get(Calendar.YEAR)}-${useDate.get(Calendar.MONTH) + 1}-" +
-                "${useDate.get(Calendar.DAY_OF_MONTH)} ${useDate.get(Calendar.HOUR)}:" +
-                "${useDate.get(Calendar.MINUTE)}:${useDate.get(Calendar.SECOND)}"
+        if (params["boxCount"] == "0") {
+            toast("没有${params["boxType"]}箱子了，试试其他类型的箱子吧")
+            return
+        }
 
         val openDate = GregorianCalendar()
         openDate.add(Calendar.MINUTE, openTimeApi[openTimeName.indexOf(params["openTime"])])
-        val openTime = "${openDate.get(Calendar.YEAR)}-${openDate.get(Calendar.MONTH) + 1}-" +
-                "${openDate.get(Calendar.DAY_OF_MONTH)} ${openDate.get(Calendar.HOUR)}:" +
-                "${openDate.get(Calendar.MINUTE)}:${openDate.get(Calendar.SECOND)}"
+        val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        format.calendar = openDate
+        val openTime = format.format(openDate.time)
 
-        RequestManager.appoint(App.user!!.id, App.user!!.nickname, App.user!!.phoneNumber,
-                boxGroup!!.groupId, params["boxSize"]!!, openTime, useTime, object : BaseObserver<String>() {
-            override fun onNext(_object: String) {
+        val user = App.user
+        if (user == null) {
+            toast("登陆过期，请重新登陆")
+            activityStart<LoginActivity>()
+            return
+        }
+
+        RequestManager.appoint(user.id, user.nickname, user.phoneNumber,
+                boxGroup!!.groupId, params["boxSize"]!!, openTime, "${useTimeApi[useTimeName.indexOf(params["useTime"])]}", object : BaseObserver<Unit>() {
+
+            override fun onNext(_object: Unit) {
                 super.onNext(_object)
                 toast("预约成功")
                 finish()
@@ -166,13 +181,20 @@ class OrderActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun performImmediately() {
-        if (!allowImmediately()) {
+        if (!BuildConfig.DEBUG && !allowImmediately()) {
             longToast("即时订单需要您距离箱子位置不超过 $MAX_DISTANCE 米")
             return
         }
 
+        val user = App.user
+        if (user == null) {
+            toast("登陆过期，请重新登陆")
+            activityStart<LoginActivity>()
+            return
+        }
+
         val params = immediatelyFragment.getOrderInfo()
-        RequestManager.order(App.user!!.id, boxGroup!!.groupId, params["boxSize"]!!, App.user!!.token, object : BaseObserver<String>() {
+        RequestManager.order(user.id, boxGroup!!.groupId, params["boxSize"]!!, user.token, object : BaseObserver<String>() {
             override fun onNext(_object: String) {
                 super.onNext(_object)
                 toast("下单成功，您的箱子号码：$_object")

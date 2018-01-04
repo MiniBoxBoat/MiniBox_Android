@@ -2,6 +2,7 @@ package com.jay86.minibox.network
 
 import com.jay86.minibox.bean.ApiWrapper
 import com.jay86.minibox.bean.BoxGroup
+import com.jay86.minibox.bean.ObjectApiWrapper
 import com.jay86.minibox.bean.User
 import com.jay86.minibox.config.*
 import io.reactivex.Observable
@@ -16,7 +17,7 @@ interface ApiService {
     @FormUrlEncoded
     @POST(LOGIN)
     fun login(@Field("phoneNumber") phone: String,
-              @Field("password") pwd: String): Observable<ApiWrapper<User>>
+              @Field("password") pwd: String): Observable<ObjectApiWrapper<User>>
 
     @FormUrlEncoded
     @POST(REGISTER)
@@ -24,22 +25,22 @@ interface ApiService {
                  @Field("phoneNumber") phone: String,
                  @Field("password") password: String,
                  @Field("sex") sex: String,
-                 @Field("verifyCode") verifyCode: String): Observable<ApiWrapper<User>>
+                 @Field("verifyCode") verifyCode: String): Observable<ObjectApiWrapper<User>>
 
     @FormUrlEncoded
     @POST(SEND_SMS)
-    fun sendSms(@Field("phoneNumber") phoneNumber: String): Observable<ApiWrapper<String>>
+    fun sendSms(@Field("phoneNumber") phoneNumber: String): Observable<ObjectApiWrapper<String>>
 
     @FormUrlEncoded
     @POST(SEARCH_BY_POINT)
-    fun searchByPoint(@Field("lat") lat: Double, @Field("lng") lng: Double): Observable<ApiWrapper<List<BoxGroup>>>
+    fun searchByPoint(@Field("lat") lat: Double, @Field("lng") lng: Double): Observable<ObjectApiWrapper<List<BoxGroup>>>
 
     @FormUrlEncoded
     @POST(SHOW_BOX_GROUP)
-    fun searchByDestination(@Field("destination") destination: String): Observable<ApiWrapper<List<BoxGroup>>>
+    fun searchByDestination(@Field("destination") destination: String): Observable<ObjectApiWrapper<List<BoxGroup>>>
 
     @GET(SHOW_BOX_GROUP)
-    fun showBoxGroup(@Query("groupId") groupId: String): Observable<ApiWrapper<BoxGroup>>
+    fun showBoxGroup(@Query("groupId") groupId: String): Observable<ObjectApiWrapper<BoxGroup>>
 
     @FormUrlEncoded
     @POST(APPOINT)
@@ -49,12 +50,12 @@ interface ApiService {
                 @Field("groupId") groupId: String,
                 @Field("boxSize") boxSize: String,
                 @Field("openTime") openTime: String,
-                @Field("useTime") useTime: String): Observable<ApiWrapper<String>>
+                @Field("useTime") useTime: String): Observable<ApiWrapper>
 
     @FormUrlEncoded
     @POST(ORDER)
     fun order(@Field("userId") userId: String,
               @Field("groupId") groupId: String,
               @Field("boxSize") boxSize: String,
-              @Field("token") token: String): Observable<ApiWrapper<String>>
+              @Field("taken") token: String): Observable<ObjectApiWrapper<String>>
 }

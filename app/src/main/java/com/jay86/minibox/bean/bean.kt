@@ -9,9 +9,9 @@ import com.google.gson.annotations.SerializedName
  * Created By jay68 on 2017/11/21.
  */
 
-data class ApiWrapper<out T>(val status: String,
-                             val message: String,
-                             @SerializedName("object") val data: T)
+open class ApiWrapper(val status: String, val message: String)
+
+class ObjectApiWrapper<out T>(status: String, message: String, @SerializedName("object") val data: T) : ApiWrapper(status, message)
 
 data class User(@SerializedName("taken") val token: String,
                 @SerializedName("userId") val id: String,

@@ -48,24 +48,29 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 doOnRefuse = { finish() }
         )
         mapView.onCreate(savedInstanceState)
+
         initView()
         initMap()
         initNavigationView()
+
+        App.onLoginStateChangeListener = { refreshUserView() }
     }
 
     override fun onResume() {
         super.onResume()
         mapView.onResume()
+        refreshUserView()
+    }
+
+    private fun refreshUserView() {
         nicknameView.text = App.user?.nickname ?: getString(R.string.main_hint_unlogin)
-        //todo 头像获取
         avatarView.setImageUrl(App.user?.avatar, resources.getDrawable(R.drawable.default_avatar))
         avatarView.visibility = if (App.isLogin) View.VISIBLE else View.INVISIBLE
     }
 
     private fun initView() {
         openMenu.setOnClickListener { drawerLayout.openDrawer(Gravity.START) }
-        qrScanner.setOnClickListener { activityStart<QRScanActivity>(false) }
-        //todo search
+        qrScanner.setOnClickListener { checkLoginBeforeAction { activityStart<QRScanActivity>(false) } }
         searchView.setOnClickListener {
             activityStartForResult<SearchActivity>(OPEN_SEARCH)
             searchBar.visibility = View.GONE
@@ -130,7 +135,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         )
     }
 
-    private fun checkLoginBeforeAction(actionIfLogin: (() -> Unit)) {
+    fun checkLoginBeforeAction(actionIfLogin: (() -> Unit)) {
         if (App.isLogin) {
             actionIfLogin.invoke()
         } else {

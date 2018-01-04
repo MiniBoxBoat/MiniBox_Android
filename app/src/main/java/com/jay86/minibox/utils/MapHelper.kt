@@ -43,6 +43,7 @@ class MapHelper(val aMap: AMap, private val activity: Activity) : AMap.OnMyLocat
             setOnInfoWindowClickListener(this@MapHelper)
             setOnMapTouchListener(this@MapHelper)
             setOnMarkerClickListener {
+                lockCenter(false)
                 curMarker = it
                 false
             }

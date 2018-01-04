@@ -70,6 +70,7 @@ class LoginActivity : BaseActivity() {
                 super.onNext(_object)
                 _object.password = pwd
                 App.user = _object
+                App.onLoginStateChangeListener?.invoke(true)
                 setPreference(SP_USER_KEY, _object.toString())
                 finish()
             }

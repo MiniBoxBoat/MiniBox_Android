@@ -1,7 +1,6 @@
 package com.jay86.minibox.ui.activity
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -14,8 +13,6 @@ import com.jay86.minibox.App
 import com.jay86.minibox.R
 import com.jay86.minibox.utils.LogUtils
 import com.jay86.minibox.utils.extension.autoHideKeyBoard
-import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.startActivityForResult
 
 /**
  * Created by Jay on 2017/10/10.
@@ -64,14 +61,6 @@ open class BaseActivity : AppCompatActivity() {
                 or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
         decorView.systemUiVisibility = uiOptions
     }
-
-    inline fun <reified T : Activity> Activity.activityStart(finishBefore: Boolean = true) {
-        startActivity<T>()
-        if (finishBefore) finish()
-    }
-
-    inline fun <reified T : Activity> Activity.activityStartForResult(requestCode: Int)
-            = startActivityForResult<T>(requestCode)
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         if (ev?.action == MotionEvent.ACTION_DOWN) {
