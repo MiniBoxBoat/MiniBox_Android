@@ -15,6 +15,7 @@ import com.jay86.minibox.ui.adapter.InfoWindowAdapter
 import com.jay86.minibox.utils.extension.animateCamera
 import com.jay86.minibox.utils.extension.lockCenter
 import com.jay86.minibox.utils.extension.showMarker
+import org.jetbrains.anko.toast
 
 
 /**
@@ -80,6 +81,21 @@ class MapHelper(val aMap: AMap, private val activity: Activity) : AMap.OnMyLocat
             override fun onNext(_object: List<BoxGroup>) {
                 super.onNext(_object)
                 aMap.showMarker(*_object.toTypedArray())
+            }
+
+            override fun onError(e: Throwable) {
+                super.onError(e)
+                RequestManager.searchByPoint(position.latitude, position.longitude, object : BaseObserver<List<BoxGroup>>() {
+                    override fun onNext(_object: List<BoxGroup>) {
+                        super.onNext(_object)
+                        aMap.showMarker(*_object.toTypedArray())
+                    }
+
+                    override fun onError(e: Throwable) {
+                        super.onError(e)
+                        activity.toast(e.message ?: "网络异常")
+                    }
+                })
             }
         })
     }

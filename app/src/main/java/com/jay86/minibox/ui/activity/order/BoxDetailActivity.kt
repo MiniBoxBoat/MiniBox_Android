@@ -58,6 +58,8 @@ class BoxDetailActivity : BaseActivity() {
                 .visible(true)
                 .draggable(false)
                 .position(LatLng(box.lat, box.lng))
+                .infoWindowEnable(false)
+
         amap.apply {
             moveCamera(box.lat, box.lng, 16f)
             addMarker(option)

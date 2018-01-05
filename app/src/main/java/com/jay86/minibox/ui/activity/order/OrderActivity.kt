@@ -110,7 +110,7 @@ class OrderActivity : BaseActivity(), View.OnClickListener {
         val amap = mapView.map
         amap.apply {
             moveCamera(boxGroup!!.lat, boxGroup!!.lng, 16f)
-            showMarker(boxGroup!!)
+            showMarker(boxGroup!!, infoEnable = false)
         }
         amap.uiSettings.apply {
             isZoomControlsEnabled = false
@@ -206,22 +206,22 @@ class OrderActivity : BaseActivity(), View.OnClickListener {
         RequestManager.order(user.id, boxGroup!!.groupId, params["boxSize"]!!, user.token, params["boxCount"]!!,
                 object : BaseObserver<List<String>>() {
                     override fun onNext(_object: List<String>) {
-                super.onNext(_object)
+                        super.onNext(_object)
                         toast("下单成功，您的箱子号码：${_object.joinToString(",")}")
-                finish()
-            }
+                        finish()
+                    }
 
-            override fun onError(e: Throwable) {
-                super.onError(e)
-                if (e.message == "用户认证错误") {
-                    toast("登陆过期，请重新登陆")
-                    App.logout()
-                    activityStart<LoginActivity>()
-                    return
-                }
-                toast(e.message ?: "网络异常")
-            }
-        })
+                    override fun onError(e: Throwable) {
+                        super.onError(e)
+                        if (e.message == "用户认证错误") {
+                            toast("登陆过期，请重新登陆")
+                            App.logout()
+                            activityStart<LoginActivity>()
+                            return
+                        }
+                        toast(e.message ?: "网络异常")
+                    }
+                })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

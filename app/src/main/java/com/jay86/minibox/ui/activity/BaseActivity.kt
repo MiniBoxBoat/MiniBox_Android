@@ -1,6 +1,7 @@
 package com.jay86.minibox.ui.activity
 
 import android.annotation.SuppressLint
+import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -39,6 +40,13 @@ open class BaseActivity : AppCompatActivity() {
         }
         LogUtils.v("activity_name", javaClass.name)
         setTitle(title)
+    }
+
+    override fun onResume() {
+        if (requestedOrientation != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        }
+        super.onResume()
     }
 
     override fun onDestroy() {

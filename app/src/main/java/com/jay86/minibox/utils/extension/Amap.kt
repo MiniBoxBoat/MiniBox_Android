@@ -38,7 +38,7 @@ fun AMap.moveToMarker(boxGroup: BoxGroup): Marker {
     return marker
 }
 
-fun AMap.showMarker(vararg boxGroup: BoxGroup/*, zoomToShowAll: Boolean = false*/): List<Marker> {
+fun AMap.showMarker(vararg boxGroup: BoxGroup, infoEnable: Boolean = true/*, zoomToShowAll: Boolean = false*/): List<Marker> {
     val markerList = arrayListOf<Marker>()
     val icon = BitmapDescriptorFactory.fromResource(R.drawable.ic_location_marker)
     val option = MarkerOptions()
@@ -46,6 +46,7 @@ fun AMap.showMarker(vararg boxGroup: BoxGroup/*, zoomToShowAll: Boolean = false*
             .setFlat(false)
             .visible(true)
             .draggable(false)
+            .infoWindowEnable(infoEnable)
 
     boxGroup.forEach {
         option.position(LatLng(it.lat, it.lng))

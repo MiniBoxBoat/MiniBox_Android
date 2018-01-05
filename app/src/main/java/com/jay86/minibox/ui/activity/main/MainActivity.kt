@@ -70,7 +70,14 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     private fun initView() {
         openMenu.setOnClickListener { drawerLayout.openDrawer(Gravity.START) }
-        qrScanner.setOnClickListener { checkLoginBeforeAction { activityStart<QRScanActivity>(false) } }
+        qrScanner.setOnClickListener {
+            doPermissionActionWithHint(Manifest.permission.CAMERA, getString(R.string.common_hint_request_camera),
+                    action = { checkLoginBeforeAction { activityStart<com.jay86.minibox.ui.activity.main.QRScanActivity>(false) } },
+                    doOnRefuse = {
+                        longToast(resources.getString(R.string.common_hint_open_camera_error))
+                    }
+            )
+        }
         searchView.setOnClickListener {
             activityStartForResult<SearchActivity>(OPEN_SEARCH)
             searchBar.visibility = View.GONE

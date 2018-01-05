@@ -51,14 +51,18 @@ class UsingBoxFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
             override fun onNext(_object: List<Box>) {
                 super.onNext(_object)
                 refreshLayout.isRefreshing = false
-                emptyContainer.visibility = View.GONE
                 adapter.refreshData(_object)
+                if (_object.isEmpty()) {
+                    emptyContainer.visibility = View.VISIBLE
+                    return
+                }
+                emptyContainer.visibility = View.GONE
             }
 
             override fun onError(e: Throwable) {
                 super.onError(e)
                 refreshLayout.isRefreshing = false
-                activity.longToast(e.message ?: "网络异常")
+                activity.longToast("获取使用箱子出错：${e.message ?: "网络异常"}")
             }
         })
     }
