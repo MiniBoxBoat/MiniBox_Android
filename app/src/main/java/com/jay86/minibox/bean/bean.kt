@@ -78,13 +78,12 @@ data class Box(val boxId: String, val boxSize: String, val boxStatus: String,
     private fun usedMinutes(): Long {
         val split = openTime.split("-", " ", ":", ".")
         val now = GregorianCalendar()
-        val openTime = GregorianCalendar(split[0].toInt(), split[1].toInt(), split[2].toInt(),
+        val openTime = GregorianCalendar(split[0].toInt(), split[1].toInt() - 1, split[2].toInt(),
                 split[3].toInt(), split[4].toInt(), split[5].toInt())
         return (now.timeInMillis - openTime.timeInMillis) / 1000 / 60
     }
 
-    //todo calc price
-    val price: Double get() = usedMinutes() * 0.5
+    val price: Double get() = usedMinutes() * 0.05
 
     val usedTime: String
         get() {

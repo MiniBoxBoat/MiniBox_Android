@@ -33,7 +33,7 @@ import java.util.*
 
 class OrderActivity : BaseActivity(), View.OnClickListener {
     companion object {
-        private const val MAX_DISTANCE = 100
+        const val MAX_DISTANCE = 50
 
         fun activityStart(activity: Activity, groupId: String) {
             activity.startActivity<OrderActivity>("groupId" to groupId)
@@ -168,7 +168,7 @@ class OrderActivity : BaseActivity(), View.OnClickListener {
         RequestManager.appoint(user.id, user.nickname, user.phoneNumber,
                 boxGroup!!.groupId, params["boxSize"]!!, openTime,
                 "${useTimeApi[useTimeName.indexOf(params["useTime"])]}", params["boxCount"]!!,
-                object : BaseObserver<Unit>() {
+                user.token, object : BaseObserver<Unit>() {
 
             override fun onNext(_object: Unit) {
                 super.onNext(_object)

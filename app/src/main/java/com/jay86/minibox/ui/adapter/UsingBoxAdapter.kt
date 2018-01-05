@@ -28,7 +28,7 @@ class UsingBoxAdapter(val data: MutableList<Box>,
         holder.boxId.text = data[position].boxId
         holder.groupName.text = data[position].groupName
         holder.useTime.text = data[position].usedTime
-        holder.price.text = "${data[position].price}"
+        holder.price.text = String.format("%.2f", data[position].price)
     }
 
     fun refreshData(list: List<Box>) {

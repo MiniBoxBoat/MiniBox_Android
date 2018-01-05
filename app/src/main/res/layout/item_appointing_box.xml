@@ -32,7 +32,7 @@
             android:id="@+id/boxTypeSuffix"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="型迷你箱"
+            android:text="型米你箱"
             android:textColor="#3D87ED"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/boxType"

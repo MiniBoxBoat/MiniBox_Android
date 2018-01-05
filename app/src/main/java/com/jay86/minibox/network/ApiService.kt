@@ -48,7 +48,8 @@ interface ApiService {
                 @Field("boxSize") boxSize: String,
                 @Field("openTime") openTime: String,
                 @Field("useTime") useTime: String,
-                @Field("boxNum") boxNum: String): Observable<ApiWrapper>
+                @Field("boxNum") boxNum: String,
+                @Field("taken") token: String): Observable<ApiWrapper>
 
     @FormUrlEncoded
     @POST(ORDER)

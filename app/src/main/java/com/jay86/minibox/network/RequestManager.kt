@@ -84,8 +84,8 @@ object RequestManager {
     }
 
     fun appoint(userId: String, userName: String, phoneNumber: String, groupId: String,
-                boxSize: String, openTime: String, useTime: String, boxNum: String, observer: Observer<Unit>) {
-        apiService.appoint(userId, userName, phoneNumber, groupId, boxSize, openTime, useTime, boxNum)
+                boxSize: String, openTime: String, useTime: String, boxNum: String, token: String, observer: Observer<Unit>) {
+        apiService.appoint(userId, userName, phoneNumber, groupId, boxSize, openTime, useTime, boxNum, token)
                 .map { it.nextOrError() }
                 .subscriber(observer)
     }
