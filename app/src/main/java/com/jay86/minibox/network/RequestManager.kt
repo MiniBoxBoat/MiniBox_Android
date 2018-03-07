@@ -1,14 +1,19 @@
 package com.jay86.minibox.network
 
+import com.jay86.minibox.App
 import com.jay86.minibox.BuildConfig
 import com.jay86.minibox.bean.*
+import com.jay86.minibox.config.BASE_TOKEN_URL
+import com.jay86.minibox.config.BASE_UPLOAD_URL
 import com.jay86.minibox.config.BASE_URL
 import com.jay86.minibox.network.observer.BaseObserver
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -24,6 +29,8 @@ object RequestManager {
     private const val DEFAULT_TIME_OUT = 30
 
     private val apiService: ApiService
+    private val uploadService: UploadService
+    private val tokenService: TokenService
 
     init {
         val client = configureOkHttp(OkHttpClient.Builder())
@@ -34,6 +41,22 @@ object RequestManager {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
         apiService = retrofit.create(ApiService::class.java)
+
+        val uploadRetrofit = Retrofit.Builder()
+                .baseUrl(BASE_UPLOAD_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build()
+        uploadService = uploadRetrofit.create(UploadService::class.java)
+
+        val tokenRetrofit = Retrofit.Builder()
+                .baseUrl(BASE_TOKEN_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build()
+        tokenService = tokenRetrofit.create(TokenService::class.java)
     }
 
     private fun configureOkHttp(builder: OkHttpClient.Builder): OkHttpClient {
@@ -55,6 +78,33 @@ object RequestManager {
 
     fun register(nickname: String, phone: String, password: String, sex: String, verifyCode: String, observer: BaseObserver<User>) {
         apiService.register(nickname, phone, password, sex, verifyCode)
+                .map { it.nextOrError() }
+                .subscriber(observer)
+    }
+
+    fun updateUserInfo(userName: String, phone: String, email: String, sex: String, token: String, trueName: String, observer: BaseObserver<User>) {
+        apiService.updateUserInfo(userName, phone, email, sex, token, trueName)
+                .map { it.nextOrError() }
+                .subscriber(observer)
+    }
+
+    fun updateAvatar(token: String, filename: String, description: RequestBody, file: MultipartBody.Part, observer: BaseObserver<Unit>) {
+        tokenService.getToken()
+                .flatMap { uploadService.uploadFile(it.data, filename, description, file) }
+                .flatMap {
+                    if (it.code == 0) {
+                        App.user!!.avatar = it.data.sourceUrl
+                        return@flatMap apiService.updateAvatar(token, it.data.sourceUrl)
+                    } else {
+                        throw ApiException(it.code.toString(), it.message)
+                    }
+                }
+                .map { it.nextOrError() }
+                .subscriber(observer)
+    }
+
+    fun resetPassword(password: String, verifyCode: String, observer: Observer<Unit>) {
+        apiService.resetPassword(password, verifyCode)
                 .map { it.nextOrError() }
                 .subscriber(observer)
     }
@@ -85,13 +135,13 @@ object RequestManager {
 
     fun appoint(userId: String, userName: String, phoneNumber: String, groupId: String,
                 boxSize: String, openTime: String, useTime: String, boxNum: String, token: String, observer: Observer<Unit>) {
-        apiService.appoint(userId, userName, phoneNumber, groupId, boxSize, openTime, useTime, boxNum, token)
+        apiService.appoint(userName, phoneNumber, groupId, boxSize, openTime, useTime, boxNum, token)
                 .map { it.nextOrError() }
                 .subscriber(observer)
     }
 
     fun order(userId: String, groupId: String, boxSize: String, token: String, boxNum: String, observer: Observer<List<String>>) {
-        apiService.order(userId, groupId, boxSize, token, boxNum)
+        apiService.order(groupId, boxSize, token, boxNum)
                 .map { it.nextOrError() }
                 .subscriber(observer)
     }

@@ -14,11 +14,16 @@ class ForgetPasswordActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forget_password)
-        //todo 回退fragment
-        toolbar.init(View.OnClickListener { finish() })
+        toolbar.init(View.OnClickListener { onBackPressed() })
 
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.fragmentContainer, ResetPasswordByPhoneFragment())
-        transaction.commit()
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, ResetPasswordByPhoneFragment(), "first")
+                .addToBackStack("first")
+                .commit()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (supportFragmentManager.backStackEntryCount <= 0) finish()
     }
 }

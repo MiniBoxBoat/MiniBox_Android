@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.jay86.minibox.ui.activity.user.EditInfoActivity">
+
+    <include layout="@layout/toolbar_common" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="6dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avatarView"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:scaleType="centerCrop"
+                app:civ_border_color="#000000"
+                app:civ_border_width="1dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/default_avatar" />
+
+            <EditText
+                android:id="@+id/nicknameView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:background="@null"
+                android:hint="@string/register_hint_nickname"
+                android:selectAllOnFocus="true"
+                android:textColor="@color/colorUserDetailUsername"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/avatarView"
+                app:layout_constraintTop_toBottomOf="@+id/avatarView"
+                tools:text="Jay" />
+
+            <ScrollView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toTopOf="@id/creditView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nicknameView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingEnd="38dp"
+                    android:paddingStart="38dp">
+
+                    <EditText
+                        android:id="@+id/phoneView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:background="@null"
+                        android:drawablePadding="16dp"
+                        android:hint="@string/register_hint_phone"
+                        android:drawableStart="@drawable/ic_user_detail_phone"
+                        android:gravity="center_vertical"
+                        android:inputType="phone"
+                        android:selectAllOnFocus="true"
+                        android:textColor="@color/colorBlack_3"
+                        android:textSize="15sp"
+                        tools:text="15923565234" />
+
+                    <View
+                        android:id="@+id/phoneDivider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/colorBlack_3" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_user_detail_gender" />
+
+                        <Spinner
+                            android:id="@+id/genderView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:entries="@array/gender"
+                            android:textColor="@color/colorBlack_3" />
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/genderDivider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/colorBlack_3" />
+
+                    <EditText
+                        android:id="@+id/emailView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:background="@null"
+                        android:drawablePadding="16dp"
+                        android:drawableStart="@drawable/ic_user_detail_email"
+                        android:gravity="center_vertical"
+                        android:inputType="textEmailAddress"
+                        android:selectAllOnFocus="true"
+                        android:textColor="@color/colorBlack_3"
+                        android:textSize="15sp"
+                        android:hint="请输入邮箱"
+                        tools:text="me@jay86.com" />
+
+                    <View
+                        android:id="@+id/emailDivider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/colorBlack_3" />
+                </LinearLayout>
+            </ScrollView>
+
+            <View
+                android:id="@+id/decoration"
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:background="#4C93FF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/useTimeHint"
+                app:layout_constraintStart_toStartOf="@+id/creditHint" />
+
+            <TextView
+                android:id="@+id/creditHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:layout_marginStart="32dp"
+                android:text="@string/user_detail_credit"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/creditView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                app:layout_constraintBottom_toTopOf="@+id/creditHint"
+                app:layout_constraintEnd_toEndOf="@+id/creditHint"
+                app:layout_constraintStart_toStartOf="@+id/creditHint"
+                tools:text="100" />
+
+            <TextView
+                android:id="@+id/useTimeHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="@string/user_detail_use_time"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/creditHint"
+                app:layout_constraintStart_toEndOf="@+id/creditHint"
+                app:layout_constraintTop_toTopOf="@id/creditHint" />
+
+            <TextView
+                android:id="@+id/useTimeView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                app:layout_constraintBottom_toTopOf="@+id/useTimeHint"
+                app:layout_constraintEnd_toEndOf="@+id/useTimeHint"
+                app:layout_constraintStart_toStartOf="@+id/useTimeHint"
+                tools:text="10" />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

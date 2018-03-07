@@ -2,6 +2,7 @@ package com.jay86.minibox.ui.fragment
 
 import android.os.Bundle
 import android.support.design.widget.TextInputEditText
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,7 @@ class ResetPasswordByPhoneFragment : BaseFragment() {
         val phone = parent.find<TextInputEditText>(R.id.phoneView)
         parent.find<Button>(R.id.submit).setOnClickListener {
             if (phone.text.isPhoneNumber()) {
-                //todo 跳转
+                ResetPasswordVerifyCodeFragment.newInstance(phone.text.toString(), activity as AppCompatActivity)
             } else {
                 phone.snackbar("手机号格式错误")
             }

@@ -11,13 +11,16 @@ import java.util.*
  */
 
 open class ApiWrapper(val status: String, val message: String)
-
 class ObjectApiWrapper<out T>(status: String, message: String, @SerializedName("object") val data: T) : ApiWrapper(status, message)
+
+data class TokenWrapper(val data: String = "",
+                        val status: Int = 0,
+                        val info: String = "")
 
 data class User(@SerializedName("taken") val token: String,
                 @SerializedName("userId") val id: String,
                 @SerializedName("userName") val nickname: String,
-                @SerializedName("image") val avatar: String,
+                @SerializedName("image") var avatar: String,
                 val phoneNumber: String,
                 val trueName: String,
                 val age: Int?,

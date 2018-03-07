@@ -58,6 +58,8 @@
     <string name="main_search">搜索</string>
     <string name="main_hint_search">搜索地点</string>
     <string name="order_sure">确定</string>
+    <string name="edit_info">修改资料</string>
+    <string name="common_hint_error_email">请输入正确的email地址哦~</string>
 
     <string-array name="gender">
         <item>男</item>

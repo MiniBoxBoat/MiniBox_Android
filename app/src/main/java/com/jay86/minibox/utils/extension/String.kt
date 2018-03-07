@@ -21,3 +21,5 @@ fun CharSequence.isChinaPhoneNumber()
         = matches(Regex("^((13[0-9])|(15[^4])|(18[0,2,3,5-9])|(17[0-8])|(147))\\d{8}$"))
 
 fun CharSequence.isHKPhoneNumber() = matches(Regex("^(5|6|8|9)\\d{7}$"))
+
+fun CharSequence.isEmail() = matches(Regex("\\w+@\\w+(\\.\\w+)+"))

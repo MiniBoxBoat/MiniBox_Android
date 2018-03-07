@@ -3,7 +3,6 @@ package com.jay86.minibox.ui.activity.main
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -17,6 +16,8 @@ import android.widget.TextView
 import com.jay86.minibox.App
 import com.jay86.minibox.R
 import com.jay86.minibox.bean.BoxGroup
+import com.jay86.minibox.network.RequestManager
+import com.jay86.minibox.network.observer.BaseObserver
 import com.jay86.minibox.ui.activity.BaseActivity
 import com.jay86.minibox.ui.activity.login.LoginActivity
 import com.jay86.minibox.ui.activity.user.UserDetailActivity
@@ -24,6 +25,9 @@ import com.jay86.minibox.utils.MapHelper
 import com.jay86.minibox.utils.extension.*
 import com.yalantis.ucrop.UCrop
 import kotlinx.android.synthetic.main.activity_main.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import org.jetbrains.anko.*
 import java.io.File
 
@@ -99,12 +103,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             checkLoginBeforeAction { activityStart<UserDetailActivity>(false) }
         }
 
-        //todo 切换头像
-        /*avatarView.setOnClickListener {
+        avatarView.setOnClickListener {
             checkLoginBeforeAction {
                 showSelectDialog()
             }
-        }*/
+        }
 
         navigationView.setNavigationItemSelectedListener(this)
     }
@@ -142,7 +145,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         )
     }
 
-    fun checkLoginBeforeAction(actionIfLogin: (() -> Unit)) {
+    private fun checkLoginBeforeAction(actionIfLogin: (() -> Unit)) {
         if (App.isLogin) {
             actionIfLogin.invoke()
         } else {
@@ -151,7 +154,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     private fun callService() {
-        val phone = "15923565234"
+        val phone = "13628474008"
         alert(message = getString(R.string.main_hint_call_service)) {
             yesButton {
                 doPermissionActionWithHint(Manifest.permission.CALL_PHONE, getString(R.string.common_hint_request_call),
@@ -179,8 +182,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 }
 
                 UCrop.REQUEST_CROP -> {
-                    val bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(UCrop.getOutput(data!!)))
-                    updateAvatar(bitmap)
+                    updateAvatar(File(UCrop.getOutput(data!!)!!.encodedPath))
                 }
 
                 OPEN_SEARCH -> {
@@ -191,12 +193,26 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 }
             }
         } else if (resultCode == UCrop.RESULT_ERROR) {
-            longToast(UCrop.getError(data!!)?.message ?: getString(R.string.common_error_crop_image_fail))
+            longToast(UCrop.getError(data!!)?.message
+                    ?: getString(R.string.common_error_crop_image_fail))
         }
     }
 
-    private fun updateAvatar(bitmap: Bitmap) {
-        //todo updateAvatar
+    private fun updateAvatar(file: File) {
+        val suffix = file.name.substring(file.name.lastIndexOf(".") + 1)
+        val filename = App.user!!.id + "_" + System.currentTimeMillis() + "." + suffix
+        val requestFile = RequestBody.create(MediaType.parse("image/" + suffix), file)
+        val part = MultipartBody.Part.createFormData("filecontent", "filecontent", requestFile)
+        val requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), "upload")
+        avatarView.setImageBitmap(BitmapFactory.decodeFile(file.path))
+        RequestManager.updateAvatar(App.user!!.token, filename, requestBody, part, object : BaseObserver<Unit>() {
+
+            override fun onError(e: Throwable) {
+                super.onError(e)
+                avatarView.setImageUrl(App.user!!.avatar)
+                longToast("上传头像失败")
+            }
+        })
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

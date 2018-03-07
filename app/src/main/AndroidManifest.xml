@@ -44,6 +44,15 @@
         <activity android:name=".ui.activity.main.MyBoxActivity" />
         <activity android:name=".ui.activity.main.DiscountActivity" />
         <activity
+            android:name=".ui.activity.main.SearchActivity"
+            android:theme="@style/AppTheme.TransparentBackground" />
+        <activity android:name=".ui.activity.order.OrderActivity" />
+        <activity android:name=".ui.activity.order.BoxDetailActivity" />
+        <activity
+            android:name=".ui.activity.user.EditInfoActivity"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
@@ -57,12 +66,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
-        <activity
-            android:name=".ui.activity.main.SearchActivity"
-            android:theme="@style/AppTheme.TransparentBackground" />
-        <activity android:name=".ui.activity.order.OrderActivity" />
-        <activity android:name=".ui.activity.order.BoxDetailActivity"></activity>
     </application>
 
 </manifest>

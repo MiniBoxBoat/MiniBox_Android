@@ -11,7 +11,8 @@ import android.view.ViewGroup
  * Created By jay68 on 2017/12/2.
  */
 open class BaseFragment : Fragment() {
-    @LayoutRes open protected val layoutId: Int = -1
+    @LayoutRes
+    protected open val layoutId: Int = -1
     open val title = ""
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {

@@ -17,7 +17,6 @@ import com.jay86.minibox.utils.extension.snackbar
 import com.jay86.usedmarket.network.observer.ProgressObserver
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.toolbar_common.*
-import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
 
 class RegisterActivity : BaseActivity(), Runnable {
@@ -119,7 +118,7 @@ class RegisterActivity : BaseActivity(), Runnable {
         val password = passwordView.text.toString()
         val gender = genderView.selectedItem.toString()
         val code = codeView.text.toString()
-        longToast("$nickname $phone $password $gender $code")
+        //longToast("$nickname $phone $password $gender $code")
         RequestManager.register(nickname, phone, password.md5(), gender, code, object : ProgressObserver<User>(this) {
             override fun onNext(_object: User) {
                 super.onNext(_object)

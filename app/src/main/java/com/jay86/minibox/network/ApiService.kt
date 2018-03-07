@@ -25,6 +25,25 @@ interface ApiService {
                  @Field("verifyCode") verifyCode: String): Observable<ObjectApiWrapper<User>>
 
     @FormUrlEncoded
+    @POST(UPDATE_USER_INFO)
+    fun updateUserInfo(@Field("userName") userName: String,
+                       @Field("phoneNumber") phone: String,
+                       @Field("email") email: String,
+                       @Field("sex") sex: String,
+                       @Field("taken") token: String,
+                       @Field("trueName") trueName: String): Observable<ObjectApiWrapper<User>>
+
+    @FormUrlEncoded
+    @POST(UPDATE_AVATAR)
+    fun updateAvatar(@Field("taken") token: String,
+                     @Field("avatarUrl") url: String): Observable<ApiWrapper>
+
+    @FormUrlEncoded
+    @POST(RESET_PASSWORD)
+    fun resetPassword(@Field("newPassword") password: String,
+                      @Field("verifyCode") verifyCode: String): Observable<ApiWrapper>
+
+    @FormUrlEncoded
     @POST(SEND_SMS)
     fun sendSms(@Field("phoneNumber") phoneNumber: String): Observable<ObjectApiWrapper<String>>
 
@@ -41,8 +60,7 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST(APPOINT)
-    fun appoint(@Field("userId") userId: String,
-                @Field("userName") userName: String,
+    fun appoint(@Field("userName") userName: String,
                 @Field("phoneNumber") phoneNumber: String,
                 @Field("groupId") groupId: String,
                 @Field("boxSize") boxSize: String,
@@ -53,8 +71,7 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST(ORDER)
-    fun order(@Field("userId") userId: String,
-              @Field("groupId") groupId: String,
+    fun order(@Field("groupId") groupId: String,
               @Field("boxSize") boxSize: String,
               @Field("taken") token: String,
               @Field("boxNum") boxNum: String): Observable<ObjectApiWrapper<List<String>>>

@@ -25,7 +25,6 @@
                 android:id="@+id/editUserView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_user_detail_edit" />
@@ -37,6 +36,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:scaleType="centerCrop"
+                app:civ_border_width="1dp"
+                app:civ_border_color="#000000"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/default_avatar" />
@@ -94,7 +95,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="32dp"
                         android:drawablePadding="16dp"
-                        android:drawableStart="@drawable/ic_register_gender"
+                        android:drawableStart="@drawable/ic_user_detail_gender"
                         android:gravity="center_vertical"
                         android:textColor="@color/colorBlack_3"
                         android:textSize="15sp"

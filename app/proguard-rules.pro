@@ -39,12 +39,22 @@
 }
 
 # map
--keep class com.amap.api.maps.**{*;}
--keep class com.autonavi.**{*;}
--keep class com.amap.api.trace.**{*;}
--keep class com.amap.api.location.**{*;}
--keep class com.amap.api.fence.**{*;}
--keep class com.autonavi.aps.amapapi.model.**{*;}
+#-keep class com.amap.api.maps.**{*;}
+#-keep class com.autonavi.**{*;}
+#-keep class com.amap.api.trace.**{*;}
+#-keep class com.amap.api.location.**{*;}
+#-keep class com.amap.api.fence.**{*;}
+#-keep class com.autonavi.aps.amapapi.model.**{*;}
+#-keep class com.amap.api.utils.**{*;}
+-libraryjars libs/AMap3DMap_6.0.0_AMapLocation_3.8.0_20180211.jar
+
+-dontwarn com.amap.api.**
+-dontwarn com.a.a.**
+-dontwarn com.autonavi.**
+
+-keep class com.amap.api.** {*;}
+-keep class com.autonavi.** {*;}
+-keep class com.a.a.** {*;}
 
 # uCrop
 -dontwarn com.yalantis.ucrop**
