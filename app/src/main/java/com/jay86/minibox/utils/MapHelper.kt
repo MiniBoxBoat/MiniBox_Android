@@ -27,6 +27,9 @@ class MapHelper(val aMap: AMap, private val activity: Activity) : AMap.OnMyLocat
     private var curLocation: Location? = null
     private var curMarker: Marker? = null
 
+    var boxGroup: ArrayList<BoxGroup> = arrayListOf()
+        private set
+
     fun init() {
         val customLocationStyle = MyLocationStyle()
                 .interval(2000)
@@ -81,6 +84,8 @@ class MapHelper(val aMap: AMap, private val activity: Activity) : AMap.OnMyLocat
             override fun onNext(_object: List<BoxGroup>) {
                 super.onNext(_object)
                 aMap.showMarker(*_object.toTypedArray())
+                boxGroup.clear()
+                boxGroup.addAll(_object)
             }
 
             override fun onError(e: Throwable) {

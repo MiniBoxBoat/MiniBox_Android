@@ -10,6 +10,7 @@ import com.jay86.minibox.bean.User
 import com.jay86.minibox.config.SP_USER_KEY
 import com.jay86.minibox.network.RequestManager
 import com.jay86.minibox.ui.activity.BaseActivity
+import com.jay86.minibox.ui.activity.setting.NeedToKnowActivity
 import com.jay86.minibox.ui.activity.user.RegisterActivity
 import com.jay86.minibox.utils.extension.*
 import com.jay86.usedmarket.network.observer.ProgressObserver
@@ -50,6 +51,7 @@ class LoginActivity : BaseActivity() {
                 else -> false
             }
         }
+        needToKnow.setOnClickListener { activityStart<NeedToKnowActivity>(false) }
     }
 
     private fun performLogin() {
@@ -61,6 +63,11 @@ class LoginActivity : BaseActivity() {
 
             passwordView.length() !in User.PASSWORD_LENGTH -> {
                 passwordView.snackbar(resources.getString(R.string.common_hint_error_password))
+                return
+            }
+
+            !checkbox.isChecked -> {
+                checkbox.snackbar("请先同意《米你箱用户服务协议》")
                 return
             }
         }

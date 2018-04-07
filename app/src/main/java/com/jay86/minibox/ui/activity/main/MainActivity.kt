@@ -20,6 +20,8 @@ import com.jay86.minibox.network.RequestManager
 import com.jay86.minibox.network.observer.BaseObserver
 import com.jay86.minibox.ui.activity.BaseActivity
 import com.jay86.minibox.ui.activity.login.LoginActivity
+import com.jay86.minibox.ui.activity.order.DiscountActivity
+import com.jay86.minibox.ui.activity.order.MyBoxActivity
 import com.jay86.minibox.ui.activity.user.UserDetailActivity
 import com.jay86.minibox.utils.MapHelper
 import com.jay86.minibox.utils.extension.*
@@ -223,12 +225,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 checkLoginBeforeAction { activityStart<DiscountActivity>(false) }
             }
             R.id.call_service -> callService()
-            R.id.settings -> {
-                //todo 设置
-//                activityStart<SettingActivity>(false)
-                App.logout()
-                activityStart<LoginActivity>(false)
+            R.id.quick_charge -> QuickChargeActivity.activityStart(this, mapHelper.boxGroup)
+            R.id.transfer_box -> {
+                //todo transfer box
+                toast("功能开发中...")
             }
+            R.id.settings -> checkLoginBeforeAction { activityStart<SettingActivity>(false) }
         }
         drawerLayout.closeDrawers()
         return true

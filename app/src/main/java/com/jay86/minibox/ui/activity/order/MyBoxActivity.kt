@@ -1,4 +1,4 @@
-package com.jay86.minibox.ui.activity.main
+package com.jay86.minibox.ui.activity.order
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout

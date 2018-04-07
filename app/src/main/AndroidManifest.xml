@@ -41,8 +41,8 @@
         <activity android:name=".ui.activity.login.ForgetPasswordActivity" />
         <activity android:name=".ui.activity.user.UserDetailActivity" />
         <activity android:name=".ui.activity.main.SettingActivity" />
-        <activity android:name=".ui.activity.main.MyBoxActivity" />
-        <activity android:name=".ui.activity.main.DiscountActivity" />
+        <activity android:name=".ui.activity.order.MyBoxActivity" />
+        <activity android:name=".ui.activity.order.DiscountActivity" />
         <activity
             android:name=".ui.activity.main.SearchActivity"
             android:theme="@style/AppTheme.TransparentBackground" />
@@ -51,7 +51,6 @@
         <activity
             android:name=".ui.activity.user.EditInfoActivity"
             android:windowSoftInputMode="adjustPan" />
-
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
@@ -66,6 +65,9 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <activity android:name=".ui.activity.main.QuickChargeActivity" />
+        <activity android:name=".ui.activity.setting.NeedToKnowActivity"></activity>
     </application>
 
 </manifest>

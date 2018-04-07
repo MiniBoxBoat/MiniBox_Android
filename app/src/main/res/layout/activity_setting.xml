@@ -2,8 +2,148 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     tools:context="com.jay86.minibox.ui.activity.main.SettingActivity">
 
     <include layout="@layout/toolbar_common" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:paddingBottom="17dp"
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp"
+                android:paddingTop="22dp"
+                android:text="账户管理"
+                android:textColor="#6A6A6A"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:alpha="0.3"
+                android:background="#6A6A6A" />
+
+            <TextView
+                android:id="@+id/notify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:paddingBottom="17dp"
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp"
+                android:paddingTop="22dp"
+                android:text="消息通知"
+                android:textColor="#6A6A6A"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/language"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="#ffffff"
+                android:paddingBottom="17dp"
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp"
+                android:paddingTop="22dp"
+                android:text="多语言"
+                android:textColor="#6A6A6A"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:alpha="0.3"
+                android:background="#6A6A6A" />
+
+            <TextView
+                android:id="@+id/manual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:paddingBottom="17dp"
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp"
+                android:paddingTop="22dp"
+                android:text="用户手册"
+                android:textColor="#6A6A6A"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/needToKnow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="#ffffff"
+                android:paddingBottom="17dp"
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp"
+                android:paddingTop="22dp"
+                android:text="法律条款与隐私政策"
+                android:textColor="#6A6A6A"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:alpha="0.3"
+                android:background="#6A6A6A" />
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:paddingBottom="17dp"
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp"
+                android:paddingTop="22dp"
+                android:text="常用使用地址"
+                android:textColor="#6A6A6A"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:alpha="0.3"
+                android:background="#6A6A6A" />
+
+            <TextView
+                android:id="@+id/update"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:paddingBottom="17dp"
+                android:paddingEnd="20dp"
+                android:paddingStart="20dp"
+                android:paddingTop="22dp"
+                android:text="版本更新"
+                android:textColor="#6A6A6A"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="30dp"
+                android:background="#ffffff"
+                android:text="退出登陆"
+                android:textColor="#4C93FF"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

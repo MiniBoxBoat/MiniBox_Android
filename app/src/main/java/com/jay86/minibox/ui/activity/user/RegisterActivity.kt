@@ -10,10 +10,8 @@ import com.jay86.minibox.bean.User
 import com.jay86.minibox.network.RequestManager
 import com.jay86.minibox.network.observer.BaseObserver
 import com.jay86.minibox.ui.activity.BaseActivity
-import com.jay86.minibox.utils.extension.containsEmpty
-import com.jay86.minibox.utils.extension.isPhoneNumber
-import com.jay86.minibox.utils.extension.md5
-import com.jay86.minibox.utils.extension.snackbar
+import com.jay86.minibox.ui.activity.setting.NeedToKnowActivity
+import com.jay86.minibox.utils.extension.*
 import com.jay86.usedmarket.network.observer.ProgressObserver
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.toolbar_common.*
@@ -42,6 +40,8 @@ class RegisterActivity : BaseActivity(), Runnable {
         getCodeView.setOnClickListener {
             sendSms()
         }
+
+        needToKnow.setOnClickListener { activityStart<NeedToKnowActivity>(false) }
     }
 
     private fun sendSms() {
@@ -104,6 +104,11 @@ class RegisterActivity : BaseActivity(), Runnable {
 
         codeView.text.toString() != code -> {
             codeView.snackbar(getString(R.string.common_hint_error_verification_code))
+            false
+        }
+
+        !checkbox.isChecked -> {
+            checkbox.snackbar("请先同意《米你箱用户服务协议》")
             false
         }
 
