@@ -79,7 +79,7 @@ class EditInfoActivity : BaseActivity() {
             false
         }
 
-        emailView.text.toString().isEmail() -> {
+        !emailView.text.toString().isEmail() -> {
             emailView.snackbar(getString(R.string.common_hint_error_email))
             false
         }

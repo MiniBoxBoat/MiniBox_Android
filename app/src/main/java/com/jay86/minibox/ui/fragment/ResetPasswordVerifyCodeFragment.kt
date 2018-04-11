@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import com.jay86.minibox.App
 import com.jay86.minibox.R
 import com.jay86.minibox.network.RequestManager
 import com.jay86.minibox.network.observer.BaseObserver
@@ -56,7 +57,7 @@ class ResetPasswordVerifyCodeFragment : BaseFragment(), Runnable {
             getCodeView.snackbar(R.string.common_hint_error_verification_code)
             return
         }
-        RequestManager.resetPassword(phoneNumber, code, object : ProgressObserver<Unit>(activity) {
+        RequestManager.resetPassword(phoneNumber, code, App.user!!.token, object : ProgressObserver<Unit>(activity) {
             override fun onNext(_object: Unit) {
                 super.onNext(_object)
                 activity.toast("修改成功")

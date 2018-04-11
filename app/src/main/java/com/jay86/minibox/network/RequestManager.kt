@@ -103,8 +103,8 @@ object RequestManager {
                 .subscriber(observer)
     }
 
-    fun resetPassword(password: String, verifyCode: String, observer: Observer<Unit>) {
-        apiService.resetPassword(password, verifyCode)
+    fun resetPassword(password: String, verifyCode: String, token: String, observer: Observer<Unit>) {
+        apiService.resetPassword(password, verifyCode, token)
                 .map { it.nextOrError() }
                 .subscriber(observer)
     }

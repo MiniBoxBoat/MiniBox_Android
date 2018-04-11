@@ -41,7 +41,8 @@ interface ApiService {
     @FormUrlEncoded
     @POST(RESET_PASSWORD)
     fun resetPassword(@Field("newPassword") password: String,
-                      @Field("verifyCode") verifyCode: String): Observable<ApiWrapper>
+                      @Field("verifyCode") verifyCode: String,
+                      @Field("taken") token: String): Observable<ApiWrapper>
 
     @FormUrlEncoded
     @POST(SEND_SMS)
