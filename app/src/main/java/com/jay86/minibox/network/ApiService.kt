@@ -77,9 +77,9 @@ interface ApiService {
               @Field("taken") token: String,
               @Field("boxNum") boxNum: String): Observable<ObjectApiWrapper<List<String>>>
 
-    @FormUrlEncoded
-    @POST(SHOW_USING_BOX)
-    fun showUsingBox(@Field("taken") token: String): Observable<ObjectApiWrapper<List<Box>>>
+//    @FormUrlEncoded
+    @GET(SHOW_USING_BOX)
+    fun showUsingBox(@Query("taken") token: String): Observable<ObjectApiWrapper<List<Box>>>
 
 //    @FormUrlEncoded
     @GET(SHOW_APPOINTING_BOX)
