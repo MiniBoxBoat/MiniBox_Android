@@ -40,14 +40,14 @@
         <activity android:name=".ui.activity.user.RegisterActivity" />
         <activity android:name=".ui.activity.login.ForgetPasswordActivity" />
         <activity android:name=".ui.activity.user.UserDetailActivity" />
-        <activity android:name=".ui.activity.main.SettingActivity" />
+        <activity android:name=".ui.activity.setting.SettingActivity" />
         <activity android:name=".ui.activity.order.MyBoxActivity" />
         <activity android:name=".ui.activity.order.DiscountActivity" />
         <activity
             android:name=".ui.activity.main.SearchActivity"
             android:theme="@style/AppTheme.TransparentBackground" />
         <activity android:name=".ui.activity.order.OrderActivity" />
-        <activity android:name=".ui.activity.order.BoxDetailActivity" />
+        <activity android:name=".ui.activity.order.UsingBoxDetailActivity" />
         <activity
             android:name=".ui.activity.user.EditInfoActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -67,7 +67,9 @@
         </provider>
 
         <activity android:name=".ui.activity.main.QuickChargeActivity" />
-        <activity android:name=".ui.activity.setting.NeedToKnowActivity"></activity>
+        <activity android:name=".ui.activity.setting.NeedToKnowActivity" />
+        <activity android:name=".ui.activity.user.OcrActivity" />
+        <activity android:name=".ui.activity.order.AppointingBoxDetailActivity"></activity>
     </application>
 
 </manifest>

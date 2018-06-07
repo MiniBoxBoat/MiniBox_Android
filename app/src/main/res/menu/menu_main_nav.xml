@@ -16,9 +16,9 @@
         android:id="@+id/call_service"
         android:title="@string/main_call_service" />
 
-    <item
+    <!--<item
         android:id="@+id/transfer_box"
-        android:title="@string/main_transfer_box" />
+        android:title="@string/main_transfer_box" />-->
 
     <item
         android:id="@+id/quick_charge"

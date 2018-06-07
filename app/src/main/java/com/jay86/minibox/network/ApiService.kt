@@ -77,9 +77,21 @@ interface ApiService {
               @Field("taken") token: String,
               @Field("boxNum") boxNum: String): Observable<ObjectApiWrapper<List<String>>>
 
-    @GET(SHOW_USING_BOX)
-    fun showUsingBox(@Query("taken") token: String): Observable<ObjectApiWrapper<List<Box>>>
+    @FormUrlEncoded
+    @POST(SHOW_USING_BOX)
+    fun showUsingBox(@Field("taken") token: String): Observable<ObjectApiWrapper<List<Box>>>
 
+//    @FormUrlEncoded
     @GET(SHOW_APPOINTING_BOX)
     fun showAppointingBox(@Query("taken") token: String): Observable<ObjectApiWrapper<List<Box>>>
+
+    @FormUrlEncoded
+    @POST(CONVERT_APPOINT_TO_ORDER)
+    fun convertAppointToOrder(@Field("reservationId") reservationId: String,
+                              @Field("taken") token: String): Observable<ApiWrapper>
+
+    @FormUrlEncoded
+    @POST(END_ORDER)
+    fun endOrder(@Field("orderId") reservationId: String,
+                 @Field("cost") token: String): Observable<ApiWrapper>
 }

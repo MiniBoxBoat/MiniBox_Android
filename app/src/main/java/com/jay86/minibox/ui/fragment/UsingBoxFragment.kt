@@ -12,7 +12,7 @@ import com.jay86.minibox.R
 import com.jay86.minibox.bean.Box
 import com.jay86.minibox.network.RequestManager
 import com.jay86.minibox.network.observer.BaseObserver
-import com.jay86.minibox.ui.activity.order.BoxDetailActivity
+import com.jay86.minibox.ui.activity.order.UsingBoxDetailActivity
 import com.jay86.minibox.ui.adapter.UsingBoxAdapter
 import kotlinx.android.synthetic.main.fragment_using_box.*
 import org.jetbrains.anko.find
@@ -26,7 +26,7 @@ class UsingBoxFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
     override val layoutId: Int = R.layout.fragment_using_box
 
     private val adapter = UsingBoxAdapter(arrayListOf()) { _, box ->
-        BoxDetailActivity.activityStart(activity, box)
+        UsingBoxDetailActivity.activityStart(activity, box)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {

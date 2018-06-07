@@ -1,5 +1,7 @@
 package com.jay86.minibox.network
 
+import com.amap.api.maps.AMapUtils
+import com.amap.api.maps.model.LatLng
 import com.jay86.minibox.App
 import com.jay86.minibox.BuildConfig
 import com.jay86.minibox.bean.*
@@ -7,6 +9,7 @@ import com.jay86.minibox.config.BASE_TOKEN_URL
 import com.jay86.minibox.config.BASE_UPLOAD_URL
 import com.jay86.minibox.config.BASE_URL
 import com.jay86.minibox.network.observer.BaseObserver
+import com.jay86.minibox.utils.LocationUtils
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -154,6 +157,18 @@ object RequestManager {
 
     fun showAppointingBox(token: String, observer: Observer<List<Box>>) {
         apiService.showAppointingBox(token)
+                .map { it.nextOrError() }
+                .subscriber(observer)
+    }
+
+    fun convertAppointToOrder(reservationId: String, token: String, observer: Observer<Unit>) {
+        apiService.convertAppointToOrder(reservationId, token)
+                .map { it.nextOrError() }
+                .subscriber(observer)
+    }
+
+    fun endOrder(orderId: String, cost: String, observer: Observer<Unit>) {
+        apiService.endOrder(orderId, cost)
                 .map { it.nextOrError() }
                 .subscriber(observer)
     }

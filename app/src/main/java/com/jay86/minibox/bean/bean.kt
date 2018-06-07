@@ -44,7 +44,7 @@ data class User(@SerializedName("taken") val token: String,
 }
 
 data class Box(val boxId: String, val boxSize: String, val boxStatus: String,
-               val groupName: String, val openTime: String, val lat: Double, val lng: Double) : Parcelable {
+               val groupName: String, val openTime: String, val lat: Double, val lng: Double, val orderId: String) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readString(),
             parcel.readString(),
@@ -52,7 +52,8 @@ data class Box(val boxId: String, val boxSize: String, val boxStatus: String,
             parcel.readString(),
             parcel.readString(),
             parcel.readDouble(),
-            parcel.readDouble())
+            parcel.readDouble(),
+            parcel.readString())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(boxId)
@@ -62,6 +63,7 @@ data class Box(val boxId: String, val boxSize: String, val boxStatus: String,
         parcel.writeString(openTime)
         parcel.writeDouble(lat)
         parcel.writeDouble(lng)
+        parcel.writeString(orderId)
     }
 
     override fun describeContents(): Int {
@@ -107,7 +109,8 @@ data class BoxGroup(val groupId: String,
                     @SerializedName("position") val title: String,
                     @SerializedName("emptyLargeBoxNum") val largeEmpty: Int,
                     @SerializedName("emptySmallBoxNum") val smallEmpty: Int,
-                    @SerializedName("quantity") val sum: Int) : Parcelable {
+                    @SerializedName("quantity") val sum: Int/*,
+                    var distance: Float*/) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readString(),
             parcel.readDouble(),
@@ -115,7 +118,8 @@ data class BoxGroup(val groupId: String,
             parcel.readString(),
             parcel.readInt(),
             parcel.readInt(),
-            parcel.readInt())
+            parcel.readInt()/*,
+            parcel.readFloat()*/)
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(groupId)
@@ -125,6 +129,7 @@ data class BoxGroup(val groupId: String,
         parcel.writeInt(largeEmpty)
         parcel.writeInt(smallEmpty)
         parcel.writeInt(sum)
+//        parcel.writeFloat(distance)
     }
 
     override fun describeContents(): Int {

@@ -12,6 +12,8 @@ import com.jay86.minibox.R
 import com.jay86.minibox.bean.Box
 import com.jay86.minibox.network.RequestManager
 import com.jay86.minibox.network.observer.BaseObserver
+import com.jay86.minibox.ui.activity.order.AppointingBoxDetailActivity
+import com.jay86.minibox.ui.activity.order.UsingBoxDetailActivity
 import com.jay86.minibox.ui.adapter.AppointingAdapter
 import kotlinx.android.synthetic.main.fragment_using_box.*
 import org.jetbrains.anko.find
@@ -25,8 +27,7 @@ class AppointingBoxFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListen
     override val layoutId: Int = R.layout.fragment_appointing_box
 
     private val adapter = AppointingAdapter(arrayListOf()) { _, box ->
-        //todo 预约
-        //BoxDetailActivity.activityStart(activity, box)
+        AppointingBoxDetailActivity.activityStart(activity, box)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
