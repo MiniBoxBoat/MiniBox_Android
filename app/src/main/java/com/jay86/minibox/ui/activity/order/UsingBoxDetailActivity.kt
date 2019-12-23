@@ -55,7 +55,7 @@ class UsingBoxDetailActivity : BaseActivity() {
                 RequestManager.endOrder(box.orderId, price.text.toString(), object : ProgressObserver<Unit>(this, "正在为您打开米你箱...") {
                     override fun onNext(_object: Unit) {
                         super.onNext(_object)
-                        toast("已为您打开${box.boxId}号米你箱，欢迎下次使用～")
+                        toast("已为您打开${box.boxId}号米你箱，请及时取走你的物品，欢迎下次使用～")
                     }
 
                     override fun onError(e: Throwable) {

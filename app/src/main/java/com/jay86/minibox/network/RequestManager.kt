@@ -156,10 +156,6 @@ object RequestManager {
                 .map {
                     val result = it.nextOrError()
                     openBox()
-                    thread {
-                        Thread.sleep(800)
-                        closeBox()
-                    }
                     return@map result ?: listOf("${(Math.random() * 100).toInt()}")
                 }
                 .subscriber(observer)
@@ -179,19 +175,31 @@ object RequestManager {
 
     fun convertAppointToOrder(reservationId: String, token: String, observer: Observer<Unit>) {
         apiService.convertAppointToOrder(reservationId, token)
-                .map { it.nextOrError() }
+                .map {
+                    val result = it.nextOrError()
+                    openBox()
+                    return@map result
+                }
                 .subscriber(observer)
     }
 
     fun endOrder(orderId: String, cost: String, observer: Observer<Unit>) {
         apiService.endOrder(orderId, cost)
-                .map { it.nextOrError() }
+                .map {
+                    val result = it.nextOrError()
+                    openBox()
+                    return@map result
+                }
                 .subscriber(observer)
     }
 
     fun openBox() {
         try {
             localAreaNetworkServer.openBox().execute()
+            thread {
+                Thread.sleep(800)
+                closeBox()
+            }
         } catch (any: Throwable) {}
     }
 

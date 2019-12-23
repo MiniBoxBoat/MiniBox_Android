@@ -90,6 +90,7 @@ class AppointingBoxDetailActivity : BaseActivity() {
             override fun onNext(_object: Unit) {
                 super.onNext(_object)
                 toast("已为您开启${box.boxId}号箱")
+                finish()
             }
 
             override fun onError(e: Throwable) {
