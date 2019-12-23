@@ -13,7 +13,7 @@ import com.jay86.minibox.utils.LocationUtils
 import org.jetbrains.anko.find
 
 /**
- * Created By jay68 on 2018/1/3.
+ * Created by Jay
  */
 class SearchRvAdapter(val callback: (boxGroup: BoxGroup) -> Unit)
     : RecyclerView.Adapter<SearchRvAdapter.ViewHolder>() {

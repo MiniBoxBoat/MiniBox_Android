@@ -7,7 +7,7 @@ import com.jay86.minibox.R
 import com.jay86.minibox.bean.BoxGroup
 
 /**
- * Created By jay68 on 2018/1/3.
+ * Created by Jay
  */
 
 private const val LOCATION_TYPE_CENTER = MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE

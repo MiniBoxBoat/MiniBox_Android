@@ -16,7 +16,7 @@ import com.jay86.minibox.utils.LogUtils
 import com.jay86.minibox.utils.extension.autoHideKeyBoard
 
 /**
- * Created by Jay on 2017/10/10.
+ * Created by Jay
  */
 
 @SuppressLint("Registered")

@@ -5,7 +5,7 @@ import android.support.design.widget.Snackbar
 import android.view.View
 
 /**
- * Created By jay68 on 2017/11/22.
+ * Created by Jay
  */
 fun View.snackbar(message: String) {
     Snackbar.make(this, message, Snackbar.LENGTH_SHORT).show()

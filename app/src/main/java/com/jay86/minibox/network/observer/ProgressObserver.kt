@@ -6,7 +6,7 @@ import com.jay86.minibox.network.observer.BaseObserver
 import io.reactivex.disposables.Disposable
 
 /**
- * Created by Jay on 2017/10/10.
+ * Created by Jay
  */
 
 abstract class ProgressObserver<T>(context: Context, msg: String = "加载中...") : BaseObserver<T>() {

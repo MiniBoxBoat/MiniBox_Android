@@ -10,7 +10,7 @@ import com.amap.api.maps.model.LatLng
 import com.jay86.minibox.App
 
 /**
- * Created By jay68 on 2018/1/2.
+ * Created by Jay
  */
 @SuppressLint("MissingPermission")
 object LocationUtils : LocationListener {

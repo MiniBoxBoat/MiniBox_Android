@@ -6,7 +6,7 @@ import io.reactivex.Observable
 import retrofit2.http.GET
 
 /**
- * Created By jay68 on 2018/3/7.
+ * Created by Jay
  */
 interface TokenService {
     @GET(GET_TOKEN)

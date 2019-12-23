@@ -19,7 +19,7 @@ import org.jetbrains.anko.toast
 
 
 /**
- * Created By jay68 on 2017/12/17.
+ * Created by Jay
  */
 class MapHelper(val aMap: AMap, private val activity: Activity) : AMap.OnMyLocationChangeListener,
         AMap.OnCameraChangeListener, AMap.OnInfoWindowClickListener, AMap.OnMapTouchListener {

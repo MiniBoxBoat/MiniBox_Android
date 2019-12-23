@@ -8,7 +8,7 @@ import okhttp3.RequestBody
 import retrofit2.http.*
 
 /**
- * Created By jay68 on 2018/3/6.
+ * Created by Jay
  */
 interface UploadService {
     @Multipart

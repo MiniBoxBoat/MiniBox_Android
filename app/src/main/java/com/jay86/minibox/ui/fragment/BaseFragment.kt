@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 /**
- * Created By jay68 on 2017/12/2.
+ * Created by Jay
  */
 open class BaseFragment : Fragment() {
     @LayoutRes

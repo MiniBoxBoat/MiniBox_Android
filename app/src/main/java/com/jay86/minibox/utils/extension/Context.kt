@@ -16,7 +16,7 @@ import org.jetbrains.anko.yesButton
 
 
 /**
- * Created By jay68 on 2017/11/28.
+ * Created by Jay
  */
 
 inline fun <reified T : Activity> Activity.activityStart(finishBefore: Boolean = true) {

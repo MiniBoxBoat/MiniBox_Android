@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 import java.util.*
 
 /**
- * Created By jay68 on 2017/11/21.
+ * Created by Jay
  */
 
 open class ApiWrapper(val status: String, val message: String)

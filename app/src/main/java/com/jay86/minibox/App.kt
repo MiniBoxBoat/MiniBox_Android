@@ -15,7 +15,7 @@ import org.jetbrains.anko.toast
 import java.io.File
 
 /**
- * Created by Jay68 on 2017/11/20.
+ * Created by Jay
  */
 class App : Application() {
     companion object {

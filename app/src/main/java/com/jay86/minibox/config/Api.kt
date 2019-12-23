@@ -2,7 +2,7 @@ package com.jay86.minibox.config
 
 /**
  * api列表
- * Created by jay68 on 2017/11/20.
+ * Created by Jay
  */
 
 const val BASE_URL = "http://box.jay86.com:8080/minibox/"
@@ -27,3 +27,5 @@ const val UPLOAD_FILE = "files/v2/1253275459/images/{filename}"
 
 const val BASE_TOKEN_URL = "http://api.jay86.com/"
 const val GET_TOKEN = "tecent/getToken.php"
+
+const val BASE_LOCAL_AREA_NETWORK_URL = "http://192.168.43.114/5/"

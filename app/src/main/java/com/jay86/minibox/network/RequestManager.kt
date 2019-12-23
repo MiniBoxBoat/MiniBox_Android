@@ -1,15 +1,13 @@
 package com.jay86.minibox.network
 
-import com.amap.api.maps.AMapUtils
-import com.amap.api.maps.model.LatLng
 import com.jay86.minibox.App
 import com.jay86.minibox.BuildConfig
 import com.jay86.minibox.bean.*
+import com.jay86.minibox.config.BASE_LOCAL_AREA_NETWORK_URL
 import com.jay86.minibox.config.BASE_TOKEN_URL
 import com.jay86.minibox.config.BASE_UPLOAD_URL
 import com.jay86.minibox.config.BASE_URL
 import com.jay86.minibox.network.observer.BaseObserver
-import com.jay86.minibox.utils.LocationUtils
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -21,11 +19,13 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.concurrent.TimeUnit
+import kotlin.concurrent.thread
 
 /**
  * 网络请求框架
- * Created by Jay on 2017/10/10.
+ * Created by Jay
  */
 object RequestManager {
     private const val REQUEST_SUCCESSFUL = "200"
@@ -34,6 +34,7 @@ object RequestManager {
     private val apiService: ApiService
     private val uploadService: UploadService
     private val tokenService: TokenService
+    private val localAreaNetworkServer: LocalAreaNetworkService
 
     init {
         val client = configureOkHttp(OkHttpClient.Builder())
@@ -60,6 +61,13 @@ object RequestManager {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
         tokenService = tokenRetrofit.create(TokenService::class.java)
+
+        val localAreaNetworkRetrofit = Retrofit.Builder()
+                .baseUrl(BASE_LOCAL_AREA_NETWORK_URL)
+                .client(client)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .build()
+        localAreaNetworkServer = localAreaNetworkRetrofit.create(LocalAreaNetworkService::class.java)
     }
 
     private fun configureOkHttp(builder: OkHttpClient.Builder): OkHttpClient {
@@ -145,7 +153,15 @@ object RequestManager {
 
     fun order(userId: String, groupId: String, boxSize: String, token: String, boxNum: String, observer: Observer<List<String>>) {
         apiService.order(groupId, boxSize, token, boxNum)
-                .map { it.nextOrError() }
+                .map {
+                    val result = it.nextOrError()
+                    openBox()
+                    thread {
+                        Thread.sleep(800)
+                        closeBox()
+                    }
+                    return@map result ?: listOf("${(Math.random() * 100).toInt()}")
+                }
                 .subscriber(observer)
     }
 
@@ -171,6 +187,18 @@ object RequestManager {
         apiService.endOrder(orderId, cost)
                 .map { it.nextOrError() }
                 .subscriber(observer)
+    }
+
+    fun openBox() {
+        try {
+            localAreaNetworkServer.openBox().execute()
+        } catch (any: Throwable) {}
+    }
+
+    fun closeBox() {
+        try {
+            localAreaNetworkServer.closeBox().execute()
+        } catch (any: Throwable) {}
     }
 
     private fun <T> ObjectApiWrapper<T>.nextOrError() =

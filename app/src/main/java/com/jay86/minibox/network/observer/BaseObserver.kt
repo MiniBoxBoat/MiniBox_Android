@@ -5,7 +5,7 @@ import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
 /**
- * Created by Jay on 2017/10/10.
+ * Created by Jay
  */
 
 open class BaseObserver<T> : Observer<T> {

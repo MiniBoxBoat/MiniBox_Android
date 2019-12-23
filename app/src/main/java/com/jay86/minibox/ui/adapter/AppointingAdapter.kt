@@ -10,7 +10,7 @@ import com.jay86.minibox.bean.Box
 import org.jetbrains.anko.find
 
 /**
- * Created By jay68 on 2018/1/4.
+ * Created by Jay
  */
 class AppointingAdapter(val data: MutableList<Box>,
                         private val onItemSelectedListener: (position: Int, box: Box) -> Unit)

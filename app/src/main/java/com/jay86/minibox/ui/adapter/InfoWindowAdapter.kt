@@ -17,7 +17,7 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
 
 /**
- * Created By jay68 on 2018/1/1.
+ * Created by Jay
  */
 class InfoWindowAdapter(private val activity: Activity) : AMap.InfoWindowAdapter {
 

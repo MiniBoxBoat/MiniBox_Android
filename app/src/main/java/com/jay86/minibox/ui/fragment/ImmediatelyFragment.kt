@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.fragment_appoint.*
 import org.jetbrains.anko.find
 
 /**
- * Created By jay68 on 2018/1/2.
+ * Created by Jay
  */
 class ImmediatelyFragment : AppointFragment(), View.OnClickListener {
 

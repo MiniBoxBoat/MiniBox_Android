@@ -5,7 +5,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 
 /**
- * Created By jay68 on 2017/11/21.
+ * Created by Jay
  */
 fun ImageView.setImageUrl(url: String?, placeHolder: Drawable? = null, errorHolder: Drawable? = null) {
     Glide.with(context)

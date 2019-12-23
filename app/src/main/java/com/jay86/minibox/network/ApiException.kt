@@ -1,6 +1,6 @@
 package com.jay86.minibox.network
 
 /**
- * Created By jay68 on 2017/11/22.
+ * Created by Jay
  */
 class ApiException(status: String, message: String) : Exception(message)

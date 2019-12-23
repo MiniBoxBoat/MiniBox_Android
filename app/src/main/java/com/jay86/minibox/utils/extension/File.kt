@@ -8,7 +8,7 @@ import java.io.File
 import java.io.IOException
 
 /**
- * Created By jay68 on 2017/12/19.
+ * Created by Jay
  */
 fun File.reset(): File {
     try {

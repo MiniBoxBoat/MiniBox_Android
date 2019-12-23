@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentPagerAdapter
 import com.jay86.minibox.ui.fragment.BaseFragment
 
 /**
- * Created By jay68 on 2018/1/4.
+ * Created by Jay
  */
 class MyBoxPagerAdapter(fm: FragmentManager?, private val fragments: List<BaseFragment>) : FragmentPagerAdapter(fm) {
     override fun getItem(position: Int) = fragments[position]

@@ -7,7 +7,7 @@ import kotlin.experimental.and
 
 /**
  * log工具
- * Created by Jay on 2017/10/10.
+ * Created by Jay
  */
 
 object LogUtils {

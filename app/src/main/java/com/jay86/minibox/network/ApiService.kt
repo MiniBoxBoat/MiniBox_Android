@@ -7,7 +7,7 @@ import retrofit2.http.*
 
 /**
  * api接口
- * Created by Jay on 2017/10/10.
+ * Created by Jay
  */
 
 interface ApiService {

@@ -14,7 +14,7 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
 
 /**
- * Created By jay68 on 2018/1/2.
+ * Created by Jay
  */
 open class AppointFragment : BaseFragment(), View.OnClickListener {
     override val layoutId: Int = R.layout.fragment_appoint

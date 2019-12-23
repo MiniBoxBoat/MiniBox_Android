@@ -19,7 +19,7 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.longToast
 
 /**
- * Created By jay68 on 2018/1/4.
+ * Created by Jay
  */
 class UsingBoxFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
     override val title: String = "使用中"
