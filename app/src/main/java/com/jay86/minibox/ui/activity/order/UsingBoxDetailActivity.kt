@@ -56,6 +56,7 @@ class UsingBoxDetailActivity : BaseActivity() {
                     override fun onNext(_object: Unit) {
                         super.onNext(_object)
                         toast("已为您打开${box.boxId}号米你箱，请及时取走你的物品，欢迎下次使用～")
+                        submit.visibility = View.GONE
                     }
 
                     override fun onError(e: Throwable) {

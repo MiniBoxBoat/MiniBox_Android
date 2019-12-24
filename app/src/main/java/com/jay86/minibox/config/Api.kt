@@ -20,7 +20,7 @@ const val ORDER = "order/order.do"
 const val SHOW_USING_BOX = "box/showUserUsingBoxes.do"
 const val SHOW_APPOINTING_BOX = "box/showUserReservingBoxes.do"
 const val CONVERT_APPOINT_TO_ORDER = "reservation/endReserve.do"
-const val END_ORDER = "box/endOrder.do"
+const val END_ORDER = "order/endOrder.do"
 
 const val BASE_UPLOAD_URL = "http://gz.file.myqcloud.com/"
 const val UPLOAD_FILE = "files/v2/1253275459/images/{filename}"

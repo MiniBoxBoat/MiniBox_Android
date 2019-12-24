@@ -30,10 +30,15 @@ class SearchRvAdapter(val callback: (boxGroup: BoxGroup) -> Unit)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val boxGroup = data[position]
         holder.position.text = boxGroup.title
-        val ds = if (distance[position] >= 1000)
-            String.format("%.2fkm", distance[position] / 1000)
-        else "${distance[position].toInt()}m"
-        holder.distance.text = ds
+        if (distance.size > position) {
+            val ds = if (distance[position] >= 1000)
+                String.format("%.2fkm", distance[position] / 1000)
+            else "${distance[position].toInt()}m"
+            holder.distance.text = ds
+        }  else {
+            holder.distance.text = "10km"
+        }
+
         holder.itemView.setOnClickListener {
             callback(boxGroup)
         }

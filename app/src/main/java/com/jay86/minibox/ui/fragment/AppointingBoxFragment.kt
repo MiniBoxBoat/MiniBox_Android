@@ -47,6 +47,11 @@ class AppointingBoxFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListen
         return parent
     }
 
+    override fun onResume() {
+        super.onResume()
+        onRefresh()
+    }
+
     override fun onRefresh() {
         RequestManager.showAppointingBox(App.user!!.token, object : BaseObserver<List<Box>>() {
             override fun onNext(_object: List<Box>) {

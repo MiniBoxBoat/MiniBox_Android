@@ -46,6 +46,11 @@ class UsingBoxFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
         return parent
     }
 
+    override fun onResume() {
+        super.onResume()
+        onRefresh()
+    }
+
     override fun onRefresh() {
         RequestManager.showUsingBox(App.user!!.token, object : BaseObserver<List<Box>>() {
             override fun onNext(_object: List<Box>) {
